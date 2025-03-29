@@ -1,0 +1,12 @@
+<div class="sidebar">
+  <i><h3>Home</h3></i>
+  <ul>
+    <li *ngFor="let route of routes">
+      <a mat-list-item [routerLink]="route.routeURL">
+        <i class="pi" [ngClass]="route.icon"></i>
+        {{ route.title }}
+      </a>
+    </li>
+  </ul>
+</div>
+
