@@ -1,0 +1,50 @@
+<app-default-login
+title="ing n and star today!"
+primaryButtonText="Sinup Now"
+secondaryButtonText="Login Now"
+(submit)="enviar()"
+(navegate)="navegate()"
+>
+
+
+
+  <form [formGroup]="sinupForm">
+
+    <app-primary-input
+    formControlName="name"
+    inputName="name"
+    type="text"
+    label="Name"
+    placeholder="Enter your Name">
+    </app-primary-input>
+
+    <app-primary-input
+    formControlName="email"
+    inputName="email"
+    type="email"
+    label="Email"
+    placeholder="Enter your email">
+    </app-primary-input>
+
+    <app-primary-input
+    formControlName="password"
+    inputName="password"
+    type="password"
+    label="Password"
+    placeholder="Enter your password"
+    >
+    </app-primary-input>
+
+    <app-primary-input
+    formControlName="confimPassword"
+    inputName="confimPassword"
+    type="password"
+    label="confime Your Password"
+    placeholder="confime Password"
+    >
+    </app-primary-input>
+
+
+    </form>
+
+</app-default-login>
