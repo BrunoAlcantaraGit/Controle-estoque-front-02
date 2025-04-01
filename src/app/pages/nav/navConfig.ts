@@ -3,23 +3,23 @@ import { naveDate } from "../navModel/navDateModel";
 export const navConfig: naveDate[] = [
   { title: 'Controle de Saída',
     icon: 'pi-shopping-cart',
-    routeURL: '/clientes' },
+    routeURL: 'saidas' },
 
   { title: 'Fornecedores',
      icon: 'pi-truck',
-     routeURL: '/clientes' },
+     routeURL: 'fornecedores' },
 
   { title: 'Clientes',
      icon:'pi pi-user',
-      routeURL: '/clientes' },
+      routeURL: 'clientes' },
 
   { title: 'Produtos',
     icon: 'pi-shopping-bag',
-     routeURL: '/clientes' },
+     routeURL: 'clientes' },
 
   { title: 'Configurações',
     icon: 'pi pi-cog',
-    routeURL: '/clientes' },
+    routeURL: 'clientes' },
 
 
 
