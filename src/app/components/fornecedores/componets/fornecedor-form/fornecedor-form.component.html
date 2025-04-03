@@ -1,0 +1,75 @@
+
+
+<form (ngSubmit)="onSubmit()">
+
+
+  <!-- Nome do Fornecedor -->
+   <div class="input-wrepper">
+    <p-floatlabel variant="in">
+      <input pInputText id="nome" [(ngModel)]="fornecedor.nome" name="nome" autocomplete="off" />
+      <label for="nome">Nome</label>
+    </p-floatlabel>
+
+    <!-- Documento do Fornecedor -->
+    <p-floatlabel>
+      <input pInputText id="documento" [(ngModel)]="fornecedor.documento" name="documento" autocomplete="off" />
+      <label for="documento">Documento</label>
+    </p-floatlabel>
+
+    <!-- Contato: Telefone -->
+    <p-floatlabel>
+      <input pInputText id="telefone" [(ngModel)]="fornecedor.contato.telefone" name="telefone" autocomplete="off" type="tel" />
+      <label for="telefone">Telefone</label>
+    </p-floatlabel>
+
+    <!-- Contato: E-mail -->
+    <p-floatlabel>
+      <input pInputText id="email" [(ngModel)]="fornecedor.contato.email" name="email" autocomplete="off" />
+      <label for="email">E-mail</label>
+    </p-floatlabel>
+
+
+
+    <p-floatlabel>
+      <input pInputText id="cep" [(ngModel)]="fornecedor.endereco.cep" name="cep" autocomplete="off" />
+      <label for="cep">CEP</label>
+    </p-floatlabel>
+
+    <p-floatlabel>
+      <input pInputText id="logradouro" [(ngModel)]="fornecedor.endereco.logradouro" name="logradouro" autocomplete="off" />
+      <label for="logradouro">Logradouro</label>
+    </p-floatlabel>
+
+    <!-- Endereço: Número -->
+    <p-floatlabel>
+      <input pInputText id="numero" [(ngModel)]="fornecedor.endereco.numero" name="numero" autocomplete="off" />
+      <label for="numero">Número</label>
+    </p-floatlabel>
+
+    <!-- Endereço: Bairro -->
+    <p-floatlabel>
+      <input pInputText id="bairro" [(ngModel)]="fornecedor.endereco.bairro" name="bairro" autocomplete="off" />
+      <label for="bairro">Bairro</label>
+    </p-floatlabel>
+
+
+
+    <!-- Endereço: Estado -->
+    <p-floatlabel>
+      <input pInputText id="estado" [(ngModel)]="fornecedor.endereco.estado" name="estado" autocomplete="off" />
+      <label for="estado">Estado</label>
+    </p-floatlabel>
+
+    <!-- Endereço: Complemento -->
+    <p-floatlabel >
+      <input pInputText id="complemento" [(ngModel)]="fornecedor.endereco.complemento" name="complemento" autocomplete="off" />
+      <label for="complemento" style="width: 500px;">Complemento</label>
+    </p-floatlabel>
+   </div>
+
+ <div class="btn-wrapper">
+  <button type="submit">Enviar</button>
+  <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">Cancelar</button>
+</div>
+</form>
+

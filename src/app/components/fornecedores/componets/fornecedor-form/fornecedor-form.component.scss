@@ -1,0 +1,81 @@
+/* Container do formulário */
+.input-wrepper {
+  display: grid;
+  gap: 1.5rem; /* Espaço entre os campos */
+  grid-template-columns: repeat(4, 1fr); /* 2 colunas de largura igual */
+  max-width: 800px; /* Largura máxima do formulário */
+  margin: 0 ; /* Centraliza o formulário */
+  padding: 2rem;
+}
+
+/* Estilos para cada input dentro do p-floatlabel */
+p-floatlabel {
+  display: flex;
+  flex-direction: column;
+  /*gap: 0.5rem;*/
+  height: 100%;
+
+  input {
+    padding: 0.75rem;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+}
+
+/* Label do p-floatlabel */
+p-floatlabel label {
+  font-size: 14px;
+  margin-left: 10px;
+  font-weight: 600;
+  color: #495057;
+  transition: all 0.3s ease;
+}
+
+p-floatlabel input:focus + label,
+p-floatlabel input.ng-dirty + label {
+  top: -10px; /* Ajuste o valor conforme necessário */
+  left: 0;
+  font-size: 12px;
+  color: #171718; /* Cor quando o campo está preenchido ou focado */
+}
+
+
+
+/* Estilo do botão de envio */
+button[type="submit"] {
+  display: flex;
+  justify-content: end;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  margin-left: 30px;
+}
+
+
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.btn-wrapper{
+  display: flex;
+  align-items: first baseline;
+}
+
+/* Responsividade: em telas menores, os campos ficam em uma coluna */
+@media (max-width: 768px) {
+  .input-wrepper {
+    grid-template-columns: 1fr; /* Apenas 1 coluna */
+  }
+
+  button[type="submit"] {
+    grid-column: span 1; /* Botão ocupa toda a largura */
+  }
+}

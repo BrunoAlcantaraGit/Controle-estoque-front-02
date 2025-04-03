@@ -1,10 +1,10 @@
 @import "../../../styles/variables.scss";
 .sidebar {
   width: 250px;
-  height: 100vh;
-  background: linear-gradient(135deg, #5d00d1 0%, #8a2be2 30%);
-
-  color: white;
+  height: 100%;
+  background: $gray-bg;
+  position: relative;
+  color: rgb(14, 13, 13);
   top: 0;
   left: 0;
   display: flex;
@@ -31,7 +31,7 @@ li {
 
 a {
   text-decoration: none;
-  color: rgb(10, 10, 10);
+  color: black;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -39,12 +39,22 @@ a {
 }
 
 a:hover {
-  background: $primary-color;
+  background: rgba(102, 51, 153, 0.315);
   border-radius: 7px;
   transition: 0.1s;
+
+
+}
+
+a.active {
+  background: rgba(112, 1, 253, 0.6); /* Mantém a seleção */
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
 }
 
 i {
   margin-right: 10px;
   font-weight: bolder;
+  color: $primary-color;
 }

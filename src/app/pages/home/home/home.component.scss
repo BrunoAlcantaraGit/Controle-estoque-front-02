@@ -1,13 +1,14 @@
-.container{
+.nav{
   display: flex;
   flex-direction: row;
 }
 
 
 
-section{
-  display: flex;
-  flex-direction: row;
+.container {
   width: 100%;
   height: 100vh;
+  padding: 1rem;
+  display: flex; /* Mantém a flexibilidade */
+  flex-direction: column; /* Para não forçar centralização total */
 }

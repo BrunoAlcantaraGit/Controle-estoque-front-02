@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,15 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
 
 constructor(
-  private router:Router
+  private router:Router,
+  private toastService: ToastrService
 ){}
 
  @Input() text = 'Logout';
 
  logout(){
   sessionStorage.removeItem('auth-token')
+  this.toastService.info("Logout efetuado com sucesso")
   this.router.navigate(['login']);
  }
 

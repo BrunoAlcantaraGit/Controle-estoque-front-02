@@ -1,6 +1,6 @@
 <app-default-login title="Login into your account"
-primaryButtonText="Login Now"
-secondaryButtonText="Sign up Now"
+primaryButtonText="Entrar"
+secondaryButtonText="Cadastre-se agora"
 (submit)="login()"
 (navegate)="navegate()"
 [disablePrimaryButton]="!loginForm.invalid"
@@ -11,7 +11,7 @@ secondaryButtonText="Sign up Now"
   inputName="email"
   type="email"
   label="Email"
-  placeholder="Enter your email">
+  placeholder="Digite seu email">
   </app-primary-input>
 
   <app-primary-input
@@ -19,11 +19,11 @@ secondaryButtonText="Sign up Now"
   inputName="password"
   type="password"
   label="Password"
-  placeholder="Enter your password"
+  placeholder="Digite sua senha"
   >
   </app-primary-input>
 
-  <span>Forget your password</span> <!--50:00-->
+  <span>Esqueci a senha</span> <!--50:00-->
 
 </form>
 </app-default-login>

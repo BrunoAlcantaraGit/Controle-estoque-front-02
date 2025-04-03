@@ -1,7 +1,7 @@
 <div class="sidebar">
   <ul>
     <li *ngFor="let route of routes">
-      <a mat-list-item [routerLink]="route.routeURL">
+      <a mat-list-item [routerLink]="route.routeURL" routerLinkActive="active">
         <i class="pi" [ngClass]="route.icon"></i>
         {{route.title}}
       </a>
