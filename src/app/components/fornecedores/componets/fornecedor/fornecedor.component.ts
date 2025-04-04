@@ -18,7 +18,7 @@ export class FornecedorComponent {
 constructor(private router: Router){}
 
 cadastrarFornecedor(): void {
-  this.router.navigate(["home/form"]);
+  this.router.navigate(["home/create"]);
 }
 
 }

@@ -26,15 +26,10 @@ export const routes: Routes = [
 
   {path:"home",
     component:HomeComponent,
-  //canActivate:[AuthGuard],
+  canActivate:[AuthGuard],
   children:[
-    {path:"fornecedores",
-      component:FornecedorComponent
-    },
-    {path:"form",
-      component:FornecedorFormComponent
-    }  ,
-    {path:"create",
+    {path:"", component:FornecedorComponent},
+ {path:"create",
       component:FornecedorCreateComponent
     },
     {path:"read",
@@ -45,8 +40,7 @@ export const routes: Routes = [
     },
 
     {path:"saidas",
-      component:SaidasComponent
-    },
+      component:SaidasComponent},
     {path:"clientes",
       component:ClientesComponent
     },
@@ -55,7 +49,5 @@ export const routes: Routes = [
 
   ]
   },
-
-
 
 ];
