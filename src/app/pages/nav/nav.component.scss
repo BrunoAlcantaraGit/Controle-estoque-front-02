@@ -47,9 +47,8 @@ a:hover {
 }
 
 a.active {
-  background: rgba(112, 1, 253, 0.6); /* Mantém a seleção */
+  background: $primary-color; /* Mantém a seleção */
   color: white;
-  font-weight: bold;
   border-radius: 7px;
 }
 

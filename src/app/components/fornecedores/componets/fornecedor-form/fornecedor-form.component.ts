@@ -60,7 +60,6 @@ criandoForm(){
   enviar(){
 
     this.envio.emit(this.form.value);
-    console.log(this.form.value);
   }
 
 

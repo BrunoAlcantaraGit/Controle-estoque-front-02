@@ -14,15 +14,20 @@ export class FornecedorServiceService {
 
 private url = 'http://localhost:8080/fornecedores/'
 
+
   cadastrarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
 
-    const token = sessionStorage.getItem('auth-token'); // Recupera o token armazenado
+    const token = sessionStorage.getItem('auth-token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'  // Define o tipo de conteúdo como JSON
+      'Content-Type': 'application/json'
     });
 
-    return this.http.post<Fornecedor>(`${this.url}salvar`, fornecedor, {headers});
+    return this.http.post<Fornecedor>(`${this.url}salvar`, fornecedor,{headers});
   }
 
+
+  listarFornecedores(): Observable<Fornecedor[]> {
+  return this.http.get<Fornecedor[]>(`${this.url}listartudo`);
+}
 }

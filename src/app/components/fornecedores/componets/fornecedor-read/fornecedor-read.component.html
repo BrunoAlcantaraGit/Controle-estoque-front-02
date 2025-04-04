@@ -1,1 +1,45 @@
-<p>fornecedor-read works!</p>
+
+<p-table
+    [value]="fornecedores"
+    [paginator]="true"
+    [rows]="5"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rowsPerPageOptions]="[5,10]"
+>
+    <ng-template #header>
+        <tr>
+            <th style="width:25%">Name</th>
+            <th style="width:25%">Documento</th>
+            <th style="width:25%">Contato</th>
+            <th style="width:25%">Email</th>
+            <th style="width:25%">Ações</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-fornecedores>
+        <tr>
+            <td>{{ fornecedores.nome }}</td>
+            <td>{{ fornecedores.documento }}</td>
+            <td>{{ fornecedores.telefone }}</td>
+            <td>{{ fornecedores.email }}</td>
+            <td>
+              <button
+                pButton
+                type="button"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-text p-button-info"
+                (click)="editarFornecedor(fornecedores)"
+                title="Editar"
+              ></button>
+
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-text p-button-danger"
+                (click)="excluirFornecedor(fornecedores)"
+                title="Excluir"
+              ></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

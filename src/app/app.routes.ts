@@ -28,12 +28,9 @@ export const routes: Routes = [
     component:HomeComponent,
   canActivate:[AuthGuard],
   children:[
-    {path:"", component:FornecedorComponent},
- {path:"create",
+    {path:"fornecedores", component:FornecedorComponent},
+    {path:"create",
       component:FornecedorCreateComponent
-    },
-    {path:"read",
-      component:FornecedorReadComponent
     },
     {path:"update",
       component:FornecedorUpdateComponent
