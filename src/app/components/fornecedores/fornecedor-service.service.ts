@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Fornecedor } from './fornecedor.type';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Endereco } from './fornecedor.type';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class FornecedorServiceService {
   ) {}
 
 private url = 'http://localhost:8080/fornecedores/'
+private url2 = "http://localhost:8080/endereco/"
 
 
   cadastrarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
@@ -28,6 +30,27 @@ private url = 'http://localhost:8080/fornecedores/'
 
 
   listarFornecedores(): Observable<Fornecedor[]> {
-  return this.http.get<Fornecedor[]>(`${this.url}listartudo`);
+
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  return this.http.get<Fornecedor[]>(`${this.url}listartudo`,{headers});
 }
+
+
+
+buscarEndereco(cep:string){
+
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+
+  return this.http.get<Endereco>(`${this.url2}endereco-api/${cep}`,{headers});
+}
+
 }

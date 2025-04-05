@@ -1,19 +1,21 @@
-
 import { Component, EventEmitter, Output,OnInit, Input } from '@angular/core';
-import { Fornecedor, Contato, Endereco } from '../../fornecedor.type'; // Adapte o caminho conforme necessário
+
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Importar FormsModule para usar ngModel
+import { FormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { Router } from '@angular/router';
 import { SplitterModule } from 'primeng/splitter';
-import{FormBuilder,FormGroup,Validators,ReactiveFormsModule,NgForm,FormControl,FormGroupDirective} from '@angular/forms';
+import{FormBuilder,FormGroup,Validators,ReactiveFormsModule} from '@angular/forms';
+
+import { FornecedorServiceService } from '../../fornecedor-service.service';
+import { Fornecedor } from '../../fornecedor.type';
 
 
 
 
 @Component({
   selector: 'app-fornecedor-form',
-  imports: [CommonModule, FormsModule, FloatLabelModule,SplitterModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, FloatLabelModule,SplitterModule,ReactiveFormsModule,],
   standalone: true,
   templateUrl: './fornecedor-form.component.html',
   styleUrl: './fornecedor-form.component.scss'
@@ -27,10 +29,12 @@ export class FornecedorFormComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder:FormBuilder,
+    private fornecedorService:FornecedorServiceService
   ) {}
 
 ngOnInit(): void {
   this.criandoForm()
+  this.changeFormeValue()
 }
 
 
@@ -52,10 +56,35 @@ criandoForm(){
       estado: this.fornecedor? this.fornecedor.endereco.estado: [''],
       complemento: this.fornecedor? this.fornecedor.endereco.complemento: [''],
     }),
-  });
+  });}
 
+  changeFormeValue(): void {
+    this.form.get('endereco.cep')?.valueChanges.subscribe((cep) => {
+      this.fornecedorService.buscarEndereco(cep).subscribe((endereco) => {
+        setTimeout(() => {//serve para gerar um delay para o endereço ser carregado
+          this.form.patchValue({
+            endereco: {
+              logradouro: endereco.logradouro || '',
+              bairro: endereco.bairro || '',
+              estado: endereco.estado || '',
+            }
+          });
 
-}
+          const enderecoGroup = this.form.get('endereco');
+          if (enderecoGroup) {
+            ['logradouro', 'bairro', 'estado'].forEach((campo) => {
+              const control = enderecoGroup.get(campo);
+              if (control) {
+                control.markAsDirty();
+                control.markAsTouched();
+                control.updateValueAndValidity({ onlySelf: true, emitEvent: true });
+              }
+            });
+          }
+        }, 0);
+      });
+    });
+  }
 
   enviar(){
 
