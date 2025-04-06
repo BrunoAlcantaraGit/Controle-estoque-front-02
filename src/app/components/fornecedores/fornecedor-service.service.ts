@@ -64,4 +64,26 @@ listarPorId(id: number): Observable<Fornecedor> {
   return this.http.get<Fornecedor>(`${this.url}listar/${id}`,{headers});
 }
 
+atualizarFornecedor(id:number, fornecedor: Fornecedor):Observable<Fornecedor>{
+
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+return this.http.put<Fornecedor>(`${this.url}atualizar/${id}`, fornecedor,{headers});
+}
+
+
+deletarPorId(id: number): Observable<void> {
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  return this.http.delete<void>(`${this.url}deletar/${id}`,{headers});
+
+}
+
 }

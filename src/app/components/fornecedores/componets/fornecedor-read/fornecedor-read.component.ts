@@ -50,12 +50,16 @@ editarFornecedor(id: number) {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.customerService.listarFornecedores().subscribe(fornecedores => this.fornecedor = fornecedores);
+
       }
+
     });
   });
 }
-excluirFornecedor(Fornecedor:any){
-  console.log("excluir fornecedor");
+excluirFornecedor(id:number){
+this.customerService.deletarPorId(id).subscribe(() => {
+  this.fornecedor = this.fornecedor.filter(fornecedor => fornecedor.id !== id);
+})
   }
 }
 

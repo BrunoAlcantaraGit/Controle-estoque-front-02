@@ -1,4 +1,4 @@
-import { Fornecedor } from './../../fornecedor.type';
+import { Fornecedor,Endereco,Contato } from './../../fornecedor.type';
 import { FornecedorServiceService } from '../../fornecedor-service.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -10,6 +10,7 @@ import{FormsModule} from '@angular/forms';
 import{MatDialogModule} from '@angular/material/dialog';
 import { FornecedorFormComponent } from '../fornecedor-form/fornecedor-form.component';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import{ActivatedRoute} from '@angular/router';
 
 
@@ -22,6 +23,7 @@ import{ActivatedRoute} from '@angular/router';
 export class FornecedorUpdateComponent implements OnInit {
 
   fornecedor!: Fornecedor
+
   id!: number
 
   constructor(
@@ -29,7 +31,8 @@ export class FornecedorUpdateComponent implements OnInit {
     private dialogRef: MatDialogRef<FornecedorUpdateComponent>,
     private router: Router,
     private activateRoute: ActivatedRoute,
-    private fornecedorService: FornecedorServiceService
+    private fornecedorService: FornecedorServiceService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +42,15 @@ export class FornecedorUpdateComponent implements OnInit {
   }
   }
 
-  atualizarFornecedor(Fornecedor: Fornecedor){}
+  atualizarFornecedor(Fornecedor: Fornecedor){
+    this.fornecedorService.atualizarFornecedor(this.fornecedor.id, Fornecedor).subscribe(fornecedor => {
+     
+    })
+    this.toastrService.success('Fornecedor atualizado com sucesso!');
+    this.dialogRef.close();
+    window.location.reload();
+
+  }
 
 
   fechar() {
