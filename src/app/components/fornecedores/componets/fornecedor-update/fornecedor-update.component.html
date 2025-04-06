@@ -1,0 +1,5 @@
+<div *ngIf="fornecedor">
+  <app-fornecedor-form [fornecedor]="fornecedor" text="Atualizar" (envio)="atualizarFornecedor($event)"
+  (cancelarEnvio)="fechar()"></app-fornecedor-form>
+
+</div>
