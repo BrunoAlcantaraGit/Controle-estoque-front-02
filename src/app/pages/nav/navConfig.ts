@@ -15,11 +15,12 @@ export const navConfig: naveDate[] = [
 
   { title: 'Produtos',
     icon: 'pi-shopping-bag',
-     routeURL: 'clientes' },
+     routeURL: '0' },
 
   { title: 'Configurações',
     icon: 'pi pi-cog',
-    routeURL: 'clientes' },
+    routeURL: '0'
+    },
 
 
 

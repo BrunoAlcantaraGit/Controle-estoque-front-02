@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaidasComponent } from './saidas.component';
+import { ClienteReadComponent } from './cliente-read.component';
 
-describe('SaidasComponent', () => {
-  let component: SaidasComponent;
-  let fixture: ComponentFixture<SaidasComponent>;
+describe('ClienteReadComponent', () => {
+  let component: ClienteReadComponent;
+  let fixture: ComponentFixture<ClienteReadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SaidasComponent]
+      imports: [ClienteReadComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SaidasComponent);
+    fixture = TestBed.createComponent(ClienteReadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
