@@ -10,7 +10,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class ClienteService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   private url = 'http://localhost:8080/clientes/'
@@ -34,4 +34,36 @@ buscarEnderecoAPI(cep:string): Observable<Endereco> {
   });
     return this.http.get<Endereco>(`${this.url2}endereco-api/${cep}`,{headers});
   }
+
+
+  listarPorid(id:number): Observable<Cliente>{
+
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<Cliente>(`${this.url}listar/${id}`,{headers});
+  }
+
+
+  listarClientes(): Observable<Cliente[]>{
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<Cliente[]>(`${this.url}listar-clientes`,{headers});
+}
+
+deletarPorId(id: number): Observable<void> {
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  return this.http.delete<void>(`${this.url}deletar/${id}`,{headers});
+
+}
 }

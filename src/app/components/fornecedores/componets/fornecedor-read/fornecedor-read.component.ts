@@ -2,8 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { Fornecedor } from '../../fornecedor.type';
-import { FornecedorServiceService } from '../../fornecedor-service.service';
  import{MatIconModule } from '@angular/material/icon';
  import { RouterLink } from '@angular/router';
  import{MatDialogModule } from '@angular/material/dialog';
@@ -11,6 +9,8 @@ import { FornecedorServiceService } from '../../fornecedor-service.service';
 import { FornecedorUpdateComponent } from '../fornecedor-update/fornecedor-update.component';
 import{ActivatedRoute} from '@angular/router';
 
+import { Fornecedor } from '../../fornecedor.type';
+import { FornecedorServiceService } from '../../fornecedor-service.service';
 
 
 
@@ -32,7 +32,6 @@ fornecedor: Fornecedor[] =[];
 
 ngOnInit(): void {
   this.customerService.listarFornecedores().subscribe((dados) => {
-    console.log('Dados recebidos:', dados);
     this.fornecedor = dados;
   });
 }

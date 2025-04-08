@@ -26,7 +26,7 @@ constructor(
  title = 'Cadastro de Fornecedor';
 
   cadastrarFornecedor(fornecedor: Fornecedor){
-    console.log(fornecedor);
+
     this.fornecedorService.cadastrarFornecedor(fornecedor).subscribe({
       next: () => {
         this.toastService.success('Fornecedor cadastrado com sucesso!', 'Sucesso');

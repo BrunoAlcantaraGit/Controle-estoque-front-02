@@ -1,1 +1,34 @@
-<p>cliente-read works!</p>
+
+<p-table
+    [value]="cliente"
+    [paginator]="true"
+    [rows]="5"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rowsPerPageOptions]="[5,10]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:25%">Name</th>
+            <th style="width:25%">Documento</th>
+            <th style="width:25%">Email</th>
+            <th style="width:25%">Contato</th>
+            <th style="width:25%">Ações</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-fornecedor>
+        <tr (click)="editarFornecedor(fornecedor.id)">
+
+            <td>{{ fornecedor.nome}}</td>
+            <td>{{ fornecedor.documento }}</td>
+            <td>{{ fornecedor.telefone }}</td>
+            <td>{{ fornecedor.email }}</td>
+              <td class="button-wrapper">
+
+              <button mat-icon-button style="color: red;"
+              (click)="excluirFornecedor(fornecedor.id); $event.stopPropagation()"
+              >
+                <i class="material-icons red">delete</i>
+            </button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
