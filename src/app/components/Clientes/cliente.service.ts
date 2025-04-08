@@ -66,4 +66,14 @@ deletarPorId(id: number): Observable<void> {
   return this.http.delete<void>(`${this.url}deletar/${id}`,{headers});
 
 }
+
+editarCliente(id:number,cliente:Cliente):Observable<Cliente>{
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.put<Cliente>(`${this.url}atualizar/${id}`, cliente,{headers});
+}
 }

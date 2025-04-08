@@ -24,7 +24,7 @@ export class FornecedorUpdateComponent implements OnInit {
 
   fornecedor!: Fornecedor
 
-  id!: number
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,13 +38,12 @@ export class FornecedorUpdateComponent implements OnInit {
   ngOnInit(): void {
     if (this.data) {
       this.fornecedor = this.data;
-      console.log("Fornecedor recebido no modal:", this.fornecedor);
   }
   }
 
   atualizarFornecedor(Fornecedor: Fornecedor){
     this.fornecedorService.atualizarFornecedor(this.fornecedor.id, Fornecedor).subscribe(fornecedor => {
-     
+
     })
     this.toastrService.success('Fornecedor atualizado com sucesso!');
     this.dialogRef.close();
