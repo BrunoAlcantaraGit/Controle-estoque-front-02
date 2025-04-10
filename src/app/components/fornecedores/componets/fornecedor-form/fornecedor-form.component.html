@@ -17,7 +17,7 @@
 
     <ng-container formGroupName="contato">
       <p-floatlabel>
-        <input matInput formControlName="telefone" formGroupName="telefone">
+        <input matInput formControlName="telefone" formGroupName="telefone" mask="99-999999" [(ngModel)]="value">
         <label for="telefone">Telefone</label>
       </p-floatlabel>
 

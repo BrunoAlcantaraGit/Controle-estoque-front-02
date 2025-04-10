@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angul
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { Router } from '@angular/router';
 import { SplitterModule } from 'primeng/splitter';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { FornecedorServiceService } from '../../fornecedor-service.service';
 import { Fornecedor } from '../../fornecedor.type';
@@ -11,7 +12,7 @@ import { Fornecedor } from '../../fornecedor.type';
 @Component({
   selector: 'app-fornecedor-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, FloatLabelModule, SplitterModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, FloatLabelModule, SplitterModule, ReactiveFormsModule,InputMaskModule],
   templateUrl: './fornecedor-form.component.html',
   styleUrl: './fornecedor-form.component.scss'
 })
@@ -23,6 +24,7 @@ export class FornecedorFormComponent implements OnInit {
   @Input() fornecedor!: Fornecedor;
   @Input() text = "Salvar";
   @Input() cancel = "Cancelar";
+  @Input() value = "";
 
   form!: FormGroup;
 
