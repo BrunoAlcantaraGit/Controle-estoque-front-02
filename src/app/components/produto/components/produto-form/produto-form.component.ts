@@ -1,3 +1,4 @@
+import { Produto } from './../../produto.type';
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
@@ -6,8 +7,10 @@ import { Router } from '@angular/router';
 import { SplitterModule } from 'primeng/splitter';
 import { InputMaskModule } from 'primeng/inputmask';
 import{FileUploadModule } from 'primeng/fileupload';
+import { HttpClient } from '@angular/common/http';
+import { ProdutoService } from '../../produto.service';
+import { HttpHeaders } from '@angular/common/http';
 
-import { Produto } from '../../produto.type';
 
 
 
@@ -23,6 +26,8 @@ export class ProdutoFormComponent implements OnInit{
   @Input() text = "Salvar"
   @Input() cancel = "Cancelar"
   @Input() value=""
+
+  imagemSelecionada: File | null = null;
   mensagemErro: string = '';
   imagemPreview: string | ArrayBuffer | null = null;
 
@@ -30,9 +35,12 @@ export class ProdutoFormComponent implements OnInit{
   produto!: Produto
 
 constructor(
-  private router: Router,
+
   private formBuilder:FormBuilder,
-  private roter:Router
+  private roter:Router,
+  private http:HttpClient,
+  private produtoService:ProdutoService
+
 
 ){}
 
@@ -42,37 +50,16 @@ this.creteForme()
 }
 
 onUpload(event: any) {
-  const file: File = event.files[0];
-
-  if (!file) return;
-
-  const tipoValido = ['image/png', 'image/jpeg'].includes(file.type);
-
-  if (!tipoValido) {
-    this.mensagemErro = 'A imagem deve ser PNG ou JPG.';
-    return;
-  }
+  const file = event.files[0];
+  this.imagemSelecionada = file;
 
   const reader = new FileReader();
-  reader.onload = (e: any) => {
-    const img = new Image();
-    img.onload = () => {
-      if (img.width === 200 && img.height === 200) {
-        this.mensagemErro = '';
-        this.imagemPreview = e.target.result;
-        this.form.patchValue({
-          img: e.target.result
-        });
-      } else {
-        this.mensagemErro = 'A imagem deve ter 200x200 pixels.';
-        this.form.patchValue({ img: '' });
-      }
-    };
-    img.src = e.target.result;
+  reader.onload = () => {
+    this.imagemPreview = reader.result;
   };
-
   reader.readAsDataURL(file);
 }
+
 
 creteForme():void{
   this.form = this.formBuilder.group({
@@ -82,15 +69,39 @@ creteForme():void{
     valorDeCompra:[this.produto?this.produto.valorDeCompra:""],
     marca:[this.produto?this.produto.marca:""],
     codigo:[this.produto?this.produto.codigo:""],
-    img:[this.produto?this.produto.img:""]
+    imagem:[this.produto?this.produto.imagem:""]
   })
 }
 
 enviar(){
-  this.envio.emit(this.form.value)
   console.log(this.form.value);
-}
 
+  const formData: FormData = new FormData();
+  const formValue = this.form.value;
+
+  formData.append('descricao', formValue.descricao);
+  formData.append('quantidade', formValue.quantidade);
+  formData.append('valorDeCompra', formValue.valorDeCompra);
+  formData.append('valorDaUnidade', formValue.valorDaUnidade);
+  formData.append('marca', formValue.marca);
+  formData.append('codigo', formValue.codigo);
+
+  if (this.imagemSelecionada) {
+    formData.append('imagem', this.imagemSelecionada);
+  }
+
+  const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    this.http.post('http://localhost:8080/produtos/salvar', formData,{headers}).subscribe({
+    next: () => console.log('Produto enviado com sucesso'),
+    error: err => console.error('Erro ao enviar produto', err)
+  })
+
+}
 
 cancelar(){}
 }

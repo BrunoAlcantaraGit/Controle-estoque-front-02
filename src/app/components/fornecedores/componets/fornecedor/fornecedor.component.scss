@@ -1,7 +1,8 @@
+@import"../../../../../styles/variables.scss";
 button {
   display: flex;
   justify-content: end;
-  background-color: #007bff;
+  background-color: $primary-color;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;

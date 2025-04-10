@@ -23,7 +23,7 @@ export class ProdutoService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.HttpClient.post<Produto>(this.ulr, produto,{headers})
+    return this.HttpClient.post<Produto>(`${this.ulr}salvar`, produto, { headers });
   }
 
 }
