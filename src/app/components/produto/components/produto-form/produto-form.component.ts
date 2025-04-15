@@ -10,22 +10,27 @@ import{FileUploadModule } from 'primeng/fileupload';
 import { HttpClient } from '@angular/common/http';
 import { ProdutoService } from '../../produto.service';
 import { HttpHeaders } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 
 
 @Component({
   selector: 'app-produto-form',
-  imports: [CommonModule,ReactiveFormsModule,SplitterModule,InputMaskModule,FloatLabelModule,FormsModule,FileUploadModule],
+  imports: [CommonModule,ReactiveFormsModule,SplitterModule,
+    InputMaskModule,FloatLabelModule,FormsModule,FileUploadModule,
+    DatePipe],
   templateUrl: './produto-form.component.html',
   styleUrl: './produto-form.component.scss'
 })
 export class ProdutoFormComponent implements OnInit{
-  @Output () envio = new EventEmitter()
+
   @Output () cancelarEnvio = new EventEmitter()
   @Input() text = "Salvar"
   @Input() cancel = "Cancelar"
   @Input() value=""
+
 
   imagemSelecionada: File | null = null;
   mensagemErro: string = '';
@@ -37,10 +42,10 @@ export class ProdutoFormComponent implements OnInit{
 constructor(
 
   private formBuilder:FormBuilder,
-  private roter:Router,
+  private router:Router,
   private http:HttpClient,
-  private produtoService:ProdutoService
-
+  private produtoService:ProdutoService,
+  private toastrService:ToastrService
 
 ){}
 
@@ -49,16 +54,14 @@ this.creteForme()
 
 }
 
-onUpload(event: any) {
-  const file = event.files[0];
-  this.imagemSelecionada = file;
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    this.imagemPreview = reader.result;
-  };
-  reader.readAsDataURL(file);
+onFileSelect(event: any): void {
+  const file = event.files[0];
+  if (file) {
+    this.imagemSelecionada = file;
+  }
 }
+
 
 
 creteForme():void{
@@ -78,6 +81,8 @@ enviar(){
 
   const formData: FormData = new FormData();
   const formValue = this.form.value;
+  const datePipe = new DatePipe('pt-BR');
+  formValue.dataCadastro = datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm');
 
   formData.append('descricao', formValue.descricao);
   formData.append('quantidade', formValue.quantidade);
@@ -85,23 +90,24 @@ enviar(){
   formData.append('valorDaUnidade', formValue.valorDaUnidade);
   formData.append('marca', formValue.marca);
   formData.append('codigo', formValue.codigo);
+  formData.append('dataCadastro', formValue.dataCadastro);
 
   if (this.imagemSelecionada) {
     formData.append('imagem', this.imagemSelecionada);
   }
 
-  const token = sessionStorage.getItem('auth-token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
+ this.produtoService.salvar(formData).subscribe({
+    next: res => {
+      this.toastrService.success('Produto cadastrado com sucesso!', 'Sucesso');
+      this.router.navigate(['home/produtos']);
 
-    this.http.post('http://localhost:8080/produtos/salvar', formData,{headers}).subscribe({
-    next: () => console.log('Produto enviado com sucesso'),
-    error: err => console.error('Erro ao enviar produto', err)
+    },
+
+    error: err => this.toastrService.error('Produto ja cadastrado, verifique o código do produto')
   })
 
 }
-
-cancelar(){}
+cancelar(){
+  this.router.navigate(['home/produtos'])
+}
 }

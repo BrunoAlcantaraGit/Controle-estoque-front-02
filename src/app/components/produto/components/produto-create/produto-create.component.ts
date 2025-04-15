@@ -1,3 +1,4 @@
+import { routes } from './../../../../app.routes';
 import { Component } from '@angular/core';
 import { ProdutoFormComponent } from '../produto-form/produto-form.component';
 import { Produto } from '../../produto.type';
@@ -19,8 +20,5 @@ export class ProdutoCreateComponent {
 
   ){}
 
-  salvarCliente(produto:Produto){
-    this.produtoService.salvar(produto).subscribe(() => this.router.navigate(['home/produtos']));
-  }
 
 }

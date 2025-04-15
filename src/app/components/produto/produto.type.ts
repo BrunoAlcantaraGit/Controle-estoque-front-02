@@ -7,4 +7,5 @@ export interface Produto{
   valorDeCompra: number,
   marca: string,
   codigo: string
+  dataCadastro: Date  
 }

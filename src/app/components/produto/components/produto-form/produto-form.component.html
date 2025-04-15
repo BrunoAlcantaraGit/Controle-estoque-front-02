@@ -40,28 +40,25 @@
 
 
 
+     <p-fileUpload class="img"
+     name="imagem"
+     mode="basic"
+     customUpload="true"
+     [auto]="false"
+     [chooseLabel]=""
+     [showUploadButton]="false"
+     [showCancelButton]="false"
+     (onSelect)="onFileSelect($event)"
+   ></p-fileUpload>
 
-<p-fileUpload class="img"
-  name="imagem"
-  [customUpload]="true"
-  accept="image/png, image/jpeg"
-  (uploadHandler)="onUpload($event)"
-  [showUploadButton]="false"
-  [showCancelButton]="false"
-  [auto]="false"
-  chooseLabel="Selecionar Imagem">
-</p-fileUpload>
-
-<p *ngIf="mensagemErro" class="text-red-500 mt-2">{{ mensagemErro }}</p>
-
-<img *ngIf="imagemPreview" [src]="imagemPreview" alt="Preview" class="mt-4" width="200" height="200">
-
+   <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Preview" class="mt-4" width="200" height="200">
 
 
 </div>
 
 <div class="btn-wrapper">
  <button type="submit" (click)="enviar()">{{text}}</button>
+
  <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
 </div>
 </form>

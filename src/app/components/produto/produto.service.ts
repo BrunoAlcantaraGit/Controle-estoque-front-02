@@ -17,13 +17,13 @@ export class ProdutoService {
   private ulr = 'http://localhost:8080/produtos/'
 
 
-  salvar(produto: Produto): Observable<Produto> {
+  salvar(formeData: FormData): Observable<Produto> {
     const token = sessionStorage.getItem('auth-token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      //'Content-Type': 'application/json'
     });
-    return this.HttpClient.post<Produto>(`${this.ulr}salvar`, produto, { headers });
+    return this.HttpClient.post<Produto>(`${this.ulr}salvar`, formeData, { headers });
   }
 
 }
