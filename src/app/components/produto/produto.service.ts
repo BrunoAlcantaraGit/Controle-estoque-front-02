@@ -26,4 +26,15 @@ export class ProdutoService {
     return this.HttpClient.post<Produto>(`${this.ulr}salvar`, formeData, { headers });
   }
 
+  listarProdutos(): Observable<Produto[]>{
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.HttpClient.get<Produto[]>(`${this.ulr}listar-tudo`,{headers});
+
+  }
+
 }

@@ -8,22 +8,25 @@
 >
     <ng-template pTemplate="header">
         <tr>
-          <th style="width:25%">Foto</th>
+            <th style="width:25%">Foto</th>
             <th style="width:25%">descricao</th>
             <th style="width:25%">quantidade</th>
             <th style="width:25%">valorDaUnidade</th>
             <th style="width:25%">valorDeCompra</th>
+            <th></th>
 
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-produtos>
         <tr (click)="editarProduto(produtos.id)">
-
+            <td>
+              <img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" />
+            </td>
             <td>{{ produtos.descricao }}</td>
             <td>{{ produtos.quantidade }}</td>
             <td>{{ produtos.valorDaUnidade }}</td>
             <td>{{ produtos.valorDeCompra }}</td>
-            <td>{{ produtos.imagem }}</td>
+
               <td class="button-wrapper">
 
               <button mat-icon-button style="color: red;"

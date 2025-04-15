@@ -18,7 +18,19 @@ import { ProdutoService } from '../../produto.service';
   templateUrl: './produto-read.component.html',
   styleUrl: './produto-read.component.scss'
 })
-export class ProdutoReadComponent {
+export class ProdutoReadComponent implements OnInit {
+
+  constructor(
+    private produtoService: ProdutoService
+  ){}
+
+  ngOnInit(): void {
+    this.listarProdutos();
+  }
+
+  listarProdutos(){
+  this.produtoService.listarProdutos().subscribe((produtos) => this.produtos = produtos)
+  }
 
   produtos!: Produto[]
 
