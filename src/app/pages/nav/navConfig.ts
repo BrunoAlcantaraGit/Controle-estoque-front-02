@@ -1,7 +1,7 @@
 import { naveDate } from "../navModel/navDateModel";
 
 export const navConfig: naveDate[] = [
-  { title: 'Painel de saidas',
+  { title: 'Gráfico de movimentações',
     icon: 'pi-wave-pulse',
     routeURL: 'painel' },
 
