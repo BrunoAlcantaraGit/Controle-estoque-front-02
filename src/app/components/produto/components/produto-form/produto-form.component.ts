@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProdutoService } from '../../produto.service';
 import { HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
+
 
 
 
@@ -25,7 +25,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './produto-form.component.scss'
 })
 export class ProdutoFormComponent implements OnInit{
-
+  @Output() eventEnvio = new EventEmitter<FormData>()
   @Output () cancelarEnvio = new EventEmitter()
   @Input() text = "Salvar"
   @Input() cancel = "Cancelar"
@@ -45,7 +45,7 @@ constructor(
   private router:Router,
   private http:HttpClient,
   private produtoService:ProdutoService,
-  private toastrService:ToastrService
+
 
 ){}
 
@@ -96,15 +96,8 @@ enviar(){
     formData.append('imagem', this.imagemSelecionada);
   }
 
- this.produtoService.salvar(formData).subscribe({
-    next: res => {
-      this.toastrService.success('Produto cadastrado com sucesso!', 'Sucesso');
-      this.router.navigate(['home/produtos']);
 
-    },
-
-    error: err => this.toastrService.error('Produto ja cadastrado, verifique o código do produto')
-  })
+   this.eventEnvio.emit(formData);
 
 }
 cancelar(){

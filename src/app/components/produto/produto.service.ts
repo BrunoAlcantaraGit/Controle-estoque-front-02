@@ -23,7 +23,7 @@ export class ProdutoService {
       'Authorization': `Bearer ${token}`,
       //'Content-Type': 'application/json'
     });
-    return this.HttpClient.post<Produto>(`${this.ulr}salvar`, formeData, { headers });
+    return this.HttpClient.post<any>(`${this.ulr}salvar`,formeData, { headers });
   }
 
   listarProdutos(): Observable<Produto[]>{
@@ -36,5 +36,27 @@ export class ProdutoService {
     return this.HttpClient.get<Produto[]>(`${this.ulr}listar-tudo`,{headers});
 
   }
+
+  editarProduto(id: number, produto:Produto): Observable<Produto> {
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+   return this.HttpClient.put<Produto>(`${this.ulr}atualizar/${id}`, produto, {headers});
+
+}
+
+
+buscarProduto(id:number): Observable<Produto> {
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.HttpClient.get<Produto>(`${this.ulr}buscar/${id}`,{headers});
+}
 
 }

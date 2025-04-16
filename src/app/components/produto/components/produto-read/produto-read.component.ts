@@ -20,21 +20,25 @@ import { ProdutoService } from '../../produto.service';
 })
 export class ProdutoReadComponent implements OnInit {
 
+  produtos!: Produto[]
+
   constructor(
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private dialog: MatDialog,
+    private activateRoute: ActivatedRoute
   ){}
 
   ngOnInit(): void {
-    this.listarProdutos();
+    this.produtoService.listarProdutos().subscribe((dados) => {
+      this.produtos = dados;
+    });
   }
 
-  listarProdutos(){
-  this.produtoService.listarProdutos().subscribe((produtos) => this.produtos = produtos)
+
+
+  editarProduto(id:number){
+    
   }
-
-  produtos!: Produto[]
-
-  editarProduto(id:number){}
 
   excluirProduto(id:number){}
 }
