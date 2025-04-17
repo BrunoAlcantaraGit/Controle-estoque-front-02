@@ -1,1 +1,2 @@
-<app-produto-form (eventEnvio)="atualizarProduto($event)" [text]="'Atualizar'"></app-produto-form>
+<app-produto-form [produto]="produto" (eventEnvio)="atualizarProduto($event)" [text]="'Atualizar'"
+(cancelarEnvio)="cancelar()"></app-produto-form>

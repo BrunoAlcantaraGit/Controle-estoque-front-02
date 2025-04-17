@@ -78,19 +78,4 @@ button[type="submit"]:hover {
   button[type="submit"] {
     grid-column: span 1;
   }
-
-
-}
-
-.img{
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  height: 100%;
-  padding: 0.75rem;
-  font-size: 16px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
-  cursor: pointer;
 }

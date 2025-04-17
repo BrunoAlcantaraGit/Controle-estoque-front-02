@@ -35,8 +35,6 @@ ngOnInit(): void {
 
   if (this.cliente) {
     this.form.patchValue(this.cliente);
-
-    // Marca todos os campos do formulário como tocados
     this.marcarCamposComoTocados(this.form);
   }
 

@@ -13,8 +13,8 @@ export class FornecedorServiceService {
     private http: HttpClient
   ) {}
 
-private url = 'http://localhost:8080/fornecedores/'
-private url2 = "http://localhost:8080/endereco/"
+private url = 'http://localhost:8181/fornecedores/'
+private url2 = "http://localhost:8181/endereco/"
 
 
   cadastrarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {

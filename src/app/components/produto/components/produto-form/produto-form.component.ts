@@ -30,6 +30,8 @@ export class ProdutoFormComponent implements OnInit{
   @Input() text = "Salvar"
   @Input() cancel = "Cancelar"
   @Input() value=""
+  @Input() formdata?: FormData
+  @Input() produto?:Produto
 
 
   imagemSelecionada: File | null = null;
@@ -37,7 +39,7 @@ export class ProdutoFormComponent implements OnInit{
   imagemPreview: string | ArrayBuffer | null = null;
 
   form!: FormGroup
-  produto!: Produto
+
 
 constructor(
 
@@ -50,8 +52,28 @@ constructor(
 ){}
 
 ngOnInit(): void {
-this.creteForme()
+this.creteForme();
 
+if(this.produto){
+  this.form.patchValue(this.produto)
+  this.marcarCamposComoTocados(this.form);
+}
+}
+
+
+
+marcarCamposComoTocados(formGroup: FormGroup) {
+  Object.keys(formGroup.controls).forEach(campo => {
+    const controle = formGroup.get(campo);
+
+    if (controle instanceof FormGroup) {
+      this.marcarCamposComoTocados(controle);
+    } else {
+      controle?.markAsTouched();
+      controle?.markAsDirty();
+      controle?.updateValueAndValidity();
+    }
+  });
 }
 
 
@@ -101,6 +123,6 @@ enviar(){
 
 }
 cancelar(){
-  this.router.navigate(['home/produtos'])
+  this.cancelarEnvio.emit(this.router.navigate(['home/produtos']));
 }
 }

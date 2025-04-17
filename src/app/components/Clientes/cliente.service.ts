@@ -13,8 +13,8 @@ export class ClienteService {
     private http: HttpClient,
   ) {}
 
-  private url = 'http://localhost:8080/clientes/'
-  private url2 = "http://localhost:8080/endereco/"
+  private url = 'http://localhost:8181/clientes/'
+  private url2 = "http://localhost:8181/endereco/"
 
   salvar(cliente: Cliente): Observable<Cliente> {
   const token = sessionStorage.getItem('auth-token');

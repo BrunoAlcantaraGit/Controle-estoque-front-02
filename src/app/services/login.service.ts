@@ -9,7 +9,7 @@ import{RegisterResponse} from '../types/registerResponse.type'
   providedIn: 'root'
 })
 export class LoginService {
- url = 'http://localhost:8080/auth/';
+ url = 'http://localhost:8181/auth/';
   constructor(
     private http: HttpClient
   ) {}

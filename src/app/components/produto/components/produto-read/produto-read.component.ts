@@ -1,3 +1,4 @@
+import { Produto } from './../../produto.type';
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,9 +9,8 @@ import { TableModule } from 'primeng/table';
  import{MatDialog } from '@angular/material/dialog';
 import{ActivatedRoute} from '@angular/router';
 
-
-import { Produto} from '../../produto.type';
 import { ProdutoService } from '../../produto.service';
+import { ProdutoUpdateComponent } from '../produto-update/produto-update.component';
 
 @Component({
   selector: 'app-produto-read',
@@ -19,7 +19,7 @@ import { ProdutoService } from '../../produto.service';
   styleUrl: './produto-read.component.scss'
 })
 export class ProdutoReadComponent implements OnInit {
-
+formDate!:FormData
   produtos!: Produto[]
 
   constructor(
@@ -37,8 +37,24 @@ export class ProdutoReadComponent implements OnInit {
 
 
   editarProduto(id:number){
-    
-  }
+    this.produtoService.buscarProduto(id).subscribe(produto => {
+      const dialogRef = this.dialog.open(ProdutoUpdateComponent, {
+        data: produto,
+        disableClose: true
+      })
 
-  excluirProduto(id:number){}
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+        this.produtoService.listarProdutos().subscribe(produtos => this.produtos = produtos);
+
+        }
+
+
+    })
+  })
+
 }
+excluirProduto(id:number){}
+}
+
+
