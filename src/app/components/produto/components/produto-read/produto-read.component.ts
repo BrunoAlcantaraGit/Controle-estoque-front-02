@@ -54,7 +54,11 @@ formDate!:FormData
   })
 
 }
-excluirProduto(id:number){}
+excluirProduto(id:number){
+  this.produtoService.deletarProduto(id).subscribe(() => {
+    this.produtos = this.produtos.filter(produto => produto.id !== id);
+  })
+}
 }
 
 

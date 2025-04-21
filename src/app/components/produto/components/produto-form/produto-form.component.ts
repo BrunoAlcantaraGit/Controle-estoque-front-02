@@ -54,8 +54,9 @@ constructor(
 ngOnInit(): void {
 this.creteForme();
 
-if(this.produto){
-  this.form.patchValue(this.produto)
+if (this.produto) {
+  const { imagem, ...rest } = this.produto; // Remover imagem
+  this.form.patchValue(rest);
   this.marcarCamposComoTocados(this.form);
 }
 }
@@ -116,13 +117,17 @@ enviar(){
 
   if (this.imagemSelecionada) {
     formData.append('imagem', this.imagemSelecionada);
+  } else if (this.produto?.imagem) {
+
+    formData.append('imagem', this.produto.imagem);
   }
 
-
-   this.eventEnvio.emit(formData);
+  this.eventEnvio.emit(formData);
 
 }
 cancelar(){
   this.cancelarEnvio.emit(this.router.navigate(['home/produtos']));
 }
+
+
 }

@@ -34,8 +34,11 @@ export class ProdutoCreateComponent {
         this.toastrService.error('Produto não registrado, verifique o preenchimento, e tente novamente', 'Erro')
         this.router.navigate(['home/produtos-create'])
       }
+
+    
     })
-  
+    this.router.navigate(['home/produtos'])
+    window.location.reload();
   }
 
 }

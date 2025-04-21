@@ -8,33 +8,31 @@
 >
     <ng-template pTemplate="header">
         <tr>
-            <th style="width: 25%">Foto</th>
-            <th style="width:25%">descricao</th>
-            <th style="width:25%">quantidade</th>
-            <th style="width:25%">valorDaUnidade</th>
-            <th style="width:25%">valorDeCompra</th>
-            <th></th>
-
+            <th style="width:20%">Foto</th>
+            <th style="width: 20%;">descricao</th>
+            <th style="width:20%">quantidade</th>
+            <th style="width:20%">valorDaUnidade</th>
+            <th style="width:20%">valorDeCompra</th>
+            <th style="width:20%">açoes</th>
+        
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-produtos>
         <tr (click)="editarProduto(produtos.id)">
-            <td>
-              <img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" />
-            </td>
+
+            <td><img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" /></td>
             <td>{{ produtos.descricao }}</td>
             <td>{{ produtos.quantidade }}</td>
             <td>{{ produtos.valorDaUnidade }}</td>
             <td>{{ produtos.valorDeCompra }}</td>
 
-              <td class="button-wrapper">
-
+            <td class="button-wrapper">
               <button mat-icon-button style="color: red;"
-              (click)="excluirProduto(produtos.id); $event.stopPropagation()"
-              >
+              (click)="excluirProduto(produtos.id); $event.stopPropagation()">
                 <i class="material-icons red">delete</i>
             </button>
             </td>
+
         </tr>
     </ng-template>
 </p-table>

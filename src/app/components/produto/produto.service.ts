@@ -41,7 +41,7 @@ export class ProdutoService {
     const token = sessionStorage.getItem('auth-token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      //'Content-Type': 'application/json'
     });
 
    return this.HttpClient.put<Produto>(`${this.ulr}atualizar/${id}`, formeData, {headers});
@@ -59,6 +59,15 @@ buscarProduto(id:number): Observable<Produto> {
   return this.HttpClient.get<Produto>(`${this.ulr}buscar/${id}`,{headers});
 }
 
+deletarProduto(id: number): Observable<Produto> {
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    //'Content-Type': 'application/json'
+  });
 
+ return this.HttpClient.delete<Produto>(`${this.ulr}deletar/${id}`, {headers});
+
+}
 
 }
