@@ -1,4 +1,3 @@
-
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -17,9 +16,9 @@ import { ProdutoComponent } from './components/produto/components/produto/produt
 import { ProdutoCreateComponent } from './components/produto/components/produto-create/produto-create.component';
 import { ProdutoUpdateComponent } from './components/produto/components/produto-update/produto-update.component';
 
-import{ SaidasComponent } from './components/saidas/components/saidas/saidas.component';
-import { SaidasCreateComponent } from './components/saidas/components/saidas-create/saidas-create.component';
-import{ SaidasUpdateComponent } from './components/saidas/components/saidas-update/saidas-update.component';
+import { VendasComponent} from './components/vendas/venda/vendas.component';
+import { VendasCreateComponent } from './components/vendas/vendas-create/vendas-create.component';
+import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
 
 import { PainelComponent} from './components/painel-saidas/components/painel/painel.component';
 import{ PainelReadComponent } from './components/painel-saidas/components/painel-read/painel-read.component';
@@ -49,9 +48,9 @@ export const routes: Routes = [
     {path:"produtos-create",component:ProdutoCreateComponent},
     {path:"produtos-update/:id",component:ProdutoUpdateComponent},
 
-    {path:"saidas",component:SaidasComponent},
-    {path:"saidas-create",component:SaidasCreateComponent},
-    {path:"saidas-update/:id",component:SaidasUpdateComponent},
+    {path:"vendas",component:VendasComponent},
+    {path:"vendas-create",component:VendasCreateComponent},
+    {path:"vendas-update/:id",component:VendasUpdateComponent},
 
     {path:"painel",component:PainelComponent},
     {path:"painel-read/:id",component:PainelReadComponent},
