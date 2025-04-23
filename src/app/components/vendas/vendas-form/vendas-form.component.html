@@ -1,1 +1,52 @@
-<p>vendas-form works!</p>
+<form [formGroup]="form">
+
+
+  <div class="input-wrepper">
+   <p-floatlabel variant="in">
+     <input matInput formControlName="codigo" id="codigo" >
+     <label for="codigo">Código da venda</label>
+   </p-floatlabel>
+
+
+   <p-floatlabel>
+    <input matInput  formControlName="UnidadeDaVenda" id="UnidadeDaVenda" >
+     <label for="UnidadeDaVenda">Valor da unidade</label>
+   </p-floatlabel>
+
+     <p-floatlabel>
+       <input matInput formControlName="totalDaVenda" formGroupName="totalDaVenda">
+       <label for="totalDaVenda">Total de vendido</label>
+     </p-floatlabel>
+
+
+     <p-floatlabel>
+      <p-dropdown
+        formControlName="clientes"
+        [options]="clientes"
+        optionLabel="cliente"
+        class="w-full md:w-56">
+      </p-dropdown>
+      <label for="clientes">cliente</label>
+    </p-floatlabel>
+
+
+     <p-floatlabel>
+      <p-dropdown
+        formControlName="produtos"
+        [options]="produtos"
+        optionLabel="nome"
+        class="w-full md:w-56">
+      </p-dropdown>
+      <label for="produtos">Produto</label>
+    </p-floatlabel>
+
+
+
+</div>
+
+<div class="btn-wrapper">
+ <button type="submit" (click)="enviar()">{{text}}</button>
+ <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
+</div>
+</form>
+

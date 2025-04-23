@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { VendasFormComponent } from "../vendas-form/vendas-form.component";
 
 @Component({
   selector: 'app-vendas-create',
-  imports: [],
+  imports: [VendasFormComponent],
   templateUrl: './vendas-create.component.html',
   styleUrl: './vendas-create.component.scss'
 })
