@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core'
 import { HttpClient} from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -30,4 +31,13 @@ return this.http.post<LoginResponse>(`${this.url}register`,{nome,email,password}
     sessionStorage.setItem('username', value.name)
   }))
 
-}}
+}
+findUser(email:string){
+  return this.http.get(`${this.url}findUser/${email}`)
+
+}
+
+}
+
+
+

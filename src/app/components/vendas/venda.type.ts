@@ -9,5 +9,5 @@ UnidadeDaVenda:number,
 totalDaVenda:number,
 data:Data,
 produtos:Produto[]
-clientes:Cliente
+cliente:Cliente
 }

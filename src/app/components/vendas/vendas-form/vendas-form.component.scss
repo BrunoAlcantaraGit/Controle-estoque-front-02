@@ -79,3 +79,23 @@ button[type="submit"]:hover {
     grid-column: span 1;
   }
 }
+
+
+#selector{
+  padding: 10px;
+  border-radius: solid 5px;
+  border-color: #000000;
+
+
+  #nome{
+    padding: 10px;
+  }
+
+}
+
+#selector:hover{
+
+  background: rgba(102, 51, 153, 0.315);
+  border-radius: 5px;
+}
+

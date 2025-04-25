@@ -1,4 +1,5 @@
 
+
 import { Router } from '@angular/router';
 import { Component, Output } from '@angular/core';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
@@ -41,14 +42,15 @@ constructor(
 }
 
 
-
 login(){
-  this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+   this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+
+
     next:(value) => {this.toastService.success("Login efetuado com sucesso")
       sessionStorage.setItem('auth-token', value.token)
       this.Router.navigate(['home']);
     },
-     //ngx-toastr
+
     error:(error) => this.toastService.error("Usuário não existe, ou credênciais inválidas"),
   });
 

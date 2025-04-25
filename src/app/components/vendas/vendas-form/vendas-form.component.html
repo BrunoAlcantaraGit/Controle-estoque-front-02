@@ -13,33 +13,27 @@
      <label for="UnidadeDaVenda">Valor da unidade</label>
    </p-floatlabel>
 
-     <p-floatlabel>
-       <input matInput formControlName="totalDaVenda" formGroupName="totalDaVenda">
-       <label for="totalDaVenda">Total de vendido</label>
-     </p-floatlabel>
+   <p-floatlabel>
+    <input matInput formControlName="totalDaVenda" id="totalDaVenda">
+    <label for="totalDaVenda">Total de vendido</label>
+  </p-floatlabel>>
 
 
-     <p-floatlabel>
-      <p-dropdown
-        formControlName="clientes"
-        [options]="clientes"
-        optionLabel="cliente"
-        class="w-full md:w-56">
-      </p-dropdown>
-      <label for="clientes">cliente</label>
-    </p-floatlabel>
+  <p-floatLabel>
+    <input matInput id="cliente" formControlName="cliente" (input)="filtrarClientes()" autocomplete="off">
+    <label for="cliente">Cliente</label>
 
-
-     <p-floatlabel>
-      <p-dropdown
-        formControlName="produtos"
-        [options]="produtos"
-        optionLabel="nome"
-        class="w-full md:w-56">
-      </p-dropdown>
-      <label for="produtos">Produto</label>
-    </p-floatlabel>
-
+    <ul *ngIf="clientesFiltrados.length > 0" class="bg-white shadow rounded mt-1 border">
+      <li
+        *ngFor="let cliente of clientesFiltrados"
+        (click)="selecionarCliente(cliente)"
+        class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+      >
+        <div class="font-semibold text-gray-800">{{ cliente.nome }}</div>
+        <div class="text-sm text-gray-500">{{ cliente.documento }}</div>
+      </li>
+    </ul>
+  </p-floatLabel>
 
 
 </div>
