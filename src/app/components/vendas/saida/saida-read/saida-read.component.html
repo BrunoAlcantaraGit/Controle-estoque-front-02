@@ -1,0 +1,30 @@
+
+<p-table
+    [value]="produtos"
+    [paginator]="true"
+    [rows]="5"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rowsPerPageOptions]="[5,10]"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:20%">Foto</th>
+            <th style="width: 20%;">descricao</th>
+            <th style="width:20%">quantidade</th>
+            <th style="width:20%">valorDaUnidade</th>
+            <th style="width:20%">valorDeCompra</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-produtos>
+        <tr (click)="registrarSaida(produtos.id)">
+
+            <td><img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" /></td>
+            <td>{{ produtos.descricao }}</td>
+            <td>{{ produtos.quantidade }}</td>
+            <td>{{ produtos.valorDaUnidade }}</td>
+            <td>{{ produtos.valorDeCompra }}</td>
+
+
+        </tr>
+    </ng-template>
+</p-table>

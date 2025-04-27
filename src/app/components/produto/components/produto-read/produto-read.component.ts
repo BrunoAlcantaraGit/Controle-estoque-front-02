@@ -14,7 +14,7 @@ import { ProdutoUpdateComponent } from '../produto-update/produto-update.compone
 
 @Component({
   selector: 'app-produto-read',
-  imports: [CommonModule, TableModule, MatIconModule, RouterLink, MatDialogModule],
+  imports: [CommonModule, TableModule, MatIconModule , MatDialogModule],
   templateUrl: './produto-read.component.html',
   styleUrl: './produto-read.component.scss'
 })

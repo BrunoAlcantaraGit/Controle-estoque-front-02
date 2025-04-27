@@ -1,107 +1,132 @@
-import { Component,Input,Output,OnInit, input } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
-import { FloatLabelModule } from 'primeng/floatlabel';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { SplitterModule } from 'primeng/splitter';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import{MatSelectModule} from '@angular/material/select';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Inject,Optional } from '@angular/core';
 
 import { ClienteService } from '../../Clientes/cliente.service';
-import { Venda} from '../venda.type';
 import { VendasService } from '../vendas.service';
+
+import { Venda } from '../venda.type';
 import { Produto } from '../../produto/produto.type';
-import{ Cliente } from '../../Clientes/cliente-taype';
-
-
+import { Cliente } from '../../Clientes/cliente-taype';
+import { SaidaReadComponent } from "../saida/saida-read/saida-read.component";
 
 @Component({
   selector: 'app-vendas-form',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,
-     FloatLabelModule, SplitterModule,DropdownModule,AutoCompleteModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FloatLabelModule,
+    SplitterModule,
+    DropdownModule,
+    AutoCompleteModule,
+    MatSelectModule,
+    SaidaReadComponent,
+],
   templateUrl: './vendas-form.component.html',
-  styleUrl: './vendas-form.component.scss'
+  styleUrls: ['./vendas-form.component.scss']
 })
 export class VendasFormComponent implements OnInit {
 
-  @Input() text = "Salvar"
-  @Input() cancel = "Cancelar"
-  form!:FormGroup
-  @Output() envio = new EventEmitter()
-  @Input() venda?: Venda
+  @Input() text = "Salvar";
+  @Input() cancel = "Cancelar";
+  @Input() venda?: Venda;
+  @Input() produtos?: Produto[];
+  @Input() clientes?: Cliente[];
+  clientesFiltrados?: Cliente[] = [];
 
-  @Input() produtos?:Produto[]
+  @Output() envio = new EventEmitter();
+  form!: FormGroup;
+  filterCliente: string = '';
 
-  @Input() clientes?:Cliente[]
-  clientesFiltrados: Cliente[] = [];
-
+  formData!: FormData
+  produto!: Produto
   constructor(
- private routes: Router,
- private formBuilder: FormBuilder,
- private vendasService: VendasService,
- private clienteService: ClienteService
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private vendasService: VendasService,
+    private clienteService: ClienteService,
 
-){}
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any = null,
+    @Optional() private dialogRef?: MatDialogRef<VendasFormComponent>,
+  ) {}
 
-ngOnInit(): void {
-  this.criarFormulario();
-  this.listarClientes();
-  this.listarProduto();
-  if (this.venda) {
-    this.form.patchValue(this.venda);
-    this.marcarCamposComoTocados(this.form);
-  }
-}
+  ngOnInit(): void {
 
-selecionarCliente(cliente: Cliente) {
-  this.form.patchValue({
-    clienteInput: cliente.nome,
-    cliente: cliente.id // ou o objeto todo, se preferir
-  });
-  this.clientesFiltrados = []; // esconde lista
-}
-filtrarClientes() {
-  const input = this.form.get('clienteInput')?.value?.toLowerCase() || '';
-  this.clientesFiltrados = (this.clientes || []).filter(cliente =>
-    cliente.nome.toLowerCase().includes(input) ||
-    cliente.documento.toLowerCase().includes(input)
-  );
-}
-
-criarFormulario(){
-  this.form = this.formBuilder.group({
-    codigo:[this.venda?this.venda.codigo:""],
-    UnidadeDaVenda:[this.venda?this.venda.UnidadeDaVenda:""],
-    totalDaVenda:[this.venda?this.venda.totalDaVenda:""],
-    produtos:[this.venda?this.venda.produtos:""],
-    cliente: [this.venda ? this.venda.cliente?.id : null]
-
-})
-
-}
-
-marcarCamposComoTocados(formGroup: FormGroup) {
-  Object.keys(formGroup.controls).forEach(campo => {
-    const controle = formGroup.get(campo);
-
-    if (controle instanceof FormGroup) {
-      this.marcarCamposComoTocados(controle);
-    } else {
-      controle?.markAsTouched();
-      controle?.markAsDirty();
-      controle?.updateValueAndValidity();
+    if (this.data) {
+      this.produto = this.data;
     }
-  });
-}
 
-listarClientes(){
-this.clienteService.listarClientes().subscribe(clientes => this.clientes = clientes);
-}
+    this.criarFormulario();
+    this.listarClientes();
 
-listarProduto(){}
 
-enviar(){}
+    if (this.venda) {
+      this.form.patchValue(this.venda);
+      this.marcarCamposComoTocados(this.form);
+    }
+  }
 
-cancelar(){}
+  criarFormulario(): void {
+    this.form = this.formBuilder.group({
+      quantidade: [this.venda?.quantidade || ""],
+      unidadeDacompra: [this.venda?.unidadeDacompra || ""],
+      UnidadeDaVenda: [this.venda?.UnidadeDaVenda || ""],
+      totalDaVenda: [this.venda?.totalDaVenda || ""] ,
+      lucroTransacao: [this.venda?.lucroTransacao || ""],
+      produtos: [this.venda?.produtos || ""],
+      cliente: [this.venda?.cliente?.id || null],
+      clienteInput: [this.venda?.cliente?.nome || ""]
+    });
+  }
+
+  listarClientes(): void {
+
+    this.clienteService.listarClientes().subscribe((clientes) => {
+      this.clientes = clientes;
+      this.clientesFiltrados = clientes;
+    });
+  }
+
+
+
+  marcarCamposComoTocados(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach(campo => {
+      const controle = formGroup.get(campo);
+      if (controle instanceof FormGroup) {
+        this.marcarCamposComoTocados(controle);
+      } else {
+        controle?.markAsTouched();
+        controle?.markAsDirty();
+        controle?.updateValueAndValidity();
+      }
+    });
+  }
+
+
+  filtrarClientes(): void {
+    const filtro = this.filterCliente.toLowerCase();
+    this.clientesFiltrados = this.clientes?.filter(cliente =>
+      cliente.nome.toLowerCase().includes(filtro) ||
+      cliente.documento.toLowerCase().includes(filtro)
+    );
+  }
+
+  enviar(): void {
+
+  }
+
+  cancelar(): void {
+
+  }
 }

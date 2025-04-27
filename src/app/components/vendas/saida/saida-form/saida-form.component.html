@@ -1,0 +1,38 @@
+<form [formGroup]="form">
+
+
+  <div class="input-wrepper">
+   <p-floatlabel variant="in">
+     <input matInput formControlName="quantidade" id="quantidade" >
+     <label for="quantidade">Quantidade de produto</label>
+   </p-floatlabel>
+
+
+   <p-floatlabel>
+    <input matInput  formControlName="UnidadeDaVenda" id="UnidadeDaVenda" >
+     <label for="UnidadeDaVenda">Valor(Uni)</label>
+   </p-floatlabel>
+
+   <p-floatlabel>
+    <input matInput  formControlName="UnidadeDaVenda" id="UnidadeDaVenda" >
+     <label for="UnidadeDaVenda">Valor da venda(Uni)</label>
+   </p-floatlabel>
+
+   <p-floatlabel>
+    <input matInput formControlName="totalDaVenda" id="totalDaVenda">
+    <label for="totalDaVenda">Total de vendido</label>
+  </p-floatlabel>
+
+  <p-floatlabel>
+    <input matInput formControlName="lucroTransacao" id="lucroTransacao">
+    <label for="lucroTransacao">Lucro da Transação</label>
+  </p-floatlabel>
+
+
+</div>
+
+<div class="btn-wrapper">
+ <button type="submit" (click)="enviar()">{{text}}</button>
+ <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
+</div>
+</form>

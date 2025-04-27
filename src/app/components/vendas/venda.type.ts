@@ -4,9 +4,11 @@ import { Cliente } from "../Clientes/cliente-taype";
 
 export interface Venda{
 id:number,
-codigo:String,
+quantidade:number,
+unidadeDacompra:number,
 UnidadeDaVenda:number,
 totalDaVenda:number,
+lucroTransacao:number,
 data:Data,
 produtos:Produto[]
 cliente:Cliente
