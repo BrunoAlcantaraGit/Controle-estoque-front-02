@@ -52,7 +52,7 @@ export class ProdutoUpdateComponent implements OnInit {
 
 
   cancelar(){
-    this.dialogRef.close();
+  this.dialogRef.close();
   this.router.navigate(['home/produtos']);
   }
 

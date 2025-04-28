@@ -2,7 +2,7 @@ import { Data } from "@angular/router";
 import { Produto } from "../produto/produto.type";
 import { Cliente } from "../Clientes/cliente-taype";
 
-export interface Venda{
+export interface Saida{
 id:number,
 quantidade:number,
 unidadeDacompra:number,

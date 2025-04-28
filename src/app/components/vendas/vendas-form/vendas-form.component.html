@@ -1,19 +1,7 @@
 
-
-<mat-form-field>
-  <mat-label>Cliente</mat-label>
-  <mat-select formControlName="cliente">
-    <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
-      {{cliente.nome}} {{cliente.documento}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-
 <h3>Selecione os produtos</h3>
 <div>
-  <app-saida-read></app-saida-read>
+  <app-saida-read (eventCancel)="cancelar()"></app-saida-read>
 </div>
 
 

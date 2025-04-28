@@ -19,6 +19,7 @@ import { ProdutoUpdateComponent } from './components/produto/components/produto-
 import { VendasComponent} from './components/vendas/venda/vendas.component';
 import { VendasCreateComponent } from './components/vendas/vendas-create/vendas-create.component';
 import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
+import { VendasFormComponent } from './components/vendas/vendas-form/vendas-form.component';
 
 import { PainelComponent} from './components/painel-saidas/components/painel/painel.component';
 import{ PainelReadComponent } from './components/painel-saidas/components/painel-read/painel-read.component';
@@ -51,6 +52,7 @@ export const routes: Routes = [
     {path:"vendas",component:VendasComponent},
     {path:"vendas-create",component:VendasCreateComponent},
     {path:"vendas-update/:id",component:VendasUpdateComponent},
+    {path:"vendas-form",component:VendasFormComponent},
 
     {path:"painel",component:PainelComponent},
     {path:"painel-read/:id",component:PainelReadComponent},
