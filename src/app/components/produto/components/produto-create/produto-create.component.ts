@@ -35,10 +35,10 @@ export class ProdutoCreateComponent {
         this.router.navigate(['home/produtos-create'])
       }
 
-    
+
     })
     this.router.navigate(['home/produtos'])
-    window.location.reload();
+   // window.location.reload();
   }
 
 }

@@ -47,7 +47,7 @@ export class ProdutoUpdateComponent implements OnInit {
     })
 
     this.router.navigate(['home/produtos'])
-    window.location.reload();
+     window.location.reload();
   }
 
 

@@ -1,7 +1,7 @@
 import { Produto } from './../../../produto/produto.type';
 
 import { Component, OnInit, Input, Output} from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule,Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -13,7 +13,8 @@ import { Inject } from '@angular/core';
 
 import { Cliente } from '../../../Clientes/cliente-taype';
 import { ClienteService } from '../../../Clientes/cliente.service';
-import { Saida } from '../../saida.type';
+import { Saida } from '../saida.type';
+import { max } from 'rxjs';
 
 
 
@@ -45,6 +46,23 @@ export class SaidaFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.criarFormulario();
+
+    this.form.valueChanges.subscribe(val => {
+      const quantidade = Number(val.quantidade);
+      const venda = Number(val.venda);
+      const compra = Number(val.compra);
+
+      if (!isNaN(quantidade) && !isNaN(compra)) {
+        const totalDaVenda = quantidade * compra;
+        this.form.get('totalDaVenda')?.setValue(totalDaVenda, { emitEvent: false });
+      }
+
+      if (!isNaN(quantidade) && !isNaN(venda) && !isNaN(venda)) {
+        const lucro = (venda - compra) * quantidade;
+        this.form.get('lucroTransacao')?.setValue(lucro, { emitEvent: false });
+      }
+    });
+
     this.listarClientes();
 
     if (this.produtoSelecionado) {
@@ -60,30 +78,25 @@ export class SaidaFormComponent implements OnInit{
 
   }
 
-
   criarFormulario(): void {
     this.form = this.formBuilder.group({
-      quantidade: [this.saida?.quantidade || ""],
-      venda: [this.saida?.venda || ""],
-      compra: [this.saida?.compra || ""],
-      totalDaVenda: [this.saida?.totalDaVenda || ""] ,
-      lucroTransacao: [this.saida?.lucroTransacao || ""],
-      cliente: [this.saida?.cliente || ""],
+      quantidade: [
+        this.saida?.quantidade || '',
+        [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(this.produtoSelecionado?.quantidade || 0)
+        ]
+      ],
+      venda: [this.saida?.venda || '', Validators.required],
+      compra: [this.saida?.compra || '', Validators.required],
+      totalDaVenda: [{ value: this.saida?.totalDaVenda || '', disabled: true }],
+      lucroTransacao: [{ value: this.saida?.lucroTransacao || '', disabled: true }],
+      cliente: [this.saida?.cliente || '', Validators.required],
     });
   }
 
-  changeValueProdutoForm():void{
-    const produtoId = this.form.get('produto')?.value;
-    const produtoSelecionado = this.produto?.find(produto => produto.id === produtoId);
-    if(produtoSelecionado){
-      this.form.patchValue({
-        quantidade: produtoSelecionado.quantidade,
-        venda:produtoSelecionado.venda,
-        compra:produtoSelecionado.compra
-      })
 
-    }
-  }
   marcarCamposComoTocados(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(campo => {
       const controle = formGroup.get(campo);
@@ -98,9 +111,7 @@ export class SaidaFormComponent implements OnInit{
     });
   }
 
-  atribuirEventos():void{
 
-  }
 
   listarClientes(): void {
 

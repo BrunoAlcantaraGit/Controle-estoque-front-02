@@ -3,28 +3,28 @@
 
   <div class="input-wrepper">
    <p-floatlabel variant="in">
-     <input matInput formControlName="quantidade" id="quantidade" >
+     <input matInput formControlName="quantidade" id="quantidade" type="number">
      <label for="quantidade">Quantidade de produto</label>
    </p-floatlabel>
 
 
    <p-floatlabel>
-    <input matInput  formControlName="venda" id="venda" >
-     <label for="venda">venda(Uni)</label>
+    <input matInput  formControlName="compra" id="compra" readonly >
+     <label for="compra">compra(Uni)</label>
    </p-floatlabel>
 
    <p-floatlabel>
-    <input matInput  formControlName="compra" id="compra" >
-     <label for="compra">compra (Uni)</label>
+    <input matInput  formControlName="venda" id="venda" readonly >
+     <label for="venda">venda (Uni)</label>
    </p-floatlabel>
 
    <p-floatlabel>
-    <input matInput formControlName="totalDaVenda" id="totalDaVenda">
+    <input matInput formControlName="totalDaVenda" id="totalDaVenda" readonly>
     <label for="totalDaVenda">Total de vendido</label>
   </p-floatlabel>
 
   <p-floatlabel>
-    <input matInput formControlName="lucroTransacao" id="lucroTransacao">
+    <input matInput formControlName="lucroTransacao" id="lucroTransacao" readonly>
     <label for="lucroTransacao">Lucro da Transação</label>
   </p-floatlabel>
 

@@ -11,8 +11,8 @@
             <th style="width:20%">Foto</th>
             <th style="width: 20%;">descricão</th>
             <th style="width:20%">quantidade</th>
-            <th style="width:20%">valor da venda</th>
             <th style="width:20%">valor da compra</th>
+            <th style="width:20%">valor da venda</th>
             <th style="width:20%">açoes</th>
 
         </tr>
@@ -23,8 +23,9 @@
             <td><img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" /></td>
             <td>{{ produtos.descricao }}</td>
             <td>{{ produtos.quantidade }}</td>
-            <td>{{ produtos.venda }}</td>
             <td>{{ produtos.compra }}</td>
+            <td>{{ produtos.venda }}</td>
+
 
             <td class="button-wrapper">
               <button mat-icon-button style="color: red;"
