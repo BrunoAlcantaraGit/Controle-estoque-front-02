@@ -5,8 +5,8 @@ import { Cliente } from "../Clientes/cliente-taype";
 export interface Saida{
 id:number,
 quantidade:number,
-unidadeDacompra:number,
-UnidadeDaVenda:number,
+venda:number,
+compra:number,
 totalDaVenda:number,
 lucroTransacao:number,
 data:Data,

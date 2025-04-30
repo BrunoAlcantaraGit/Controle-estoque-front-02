@@ -3,9 +3,9 @@ export interface Produto{
   imagem: string,
   descricao: string,
   quantidade: number,
-  valorDaUnidade: number,
-  valorDeCompra: number,
+  venda: number,
+  compra: number,
   marca: string,
   codigo: string
-  dataCadastro: Date  
+  dataCadastro: Date
 }

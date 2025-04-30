@@ -8,7 +8,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import{MatSelectModule} from '@angular/material/select';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Inject } from '@angular/core';
 
 import { Cliente } from '../../../Clientes/cliente-taype';
 import { ClienteService } from '../../../Clientes/cliente.service';
@@ -31,54 +32,58 @@ export class SaidaFormComponent implements OnInit{
   @Output() envio = new EventEmitter()
   @Output() eventCancel = new EventEmitter()
   @Input() clientes?: Cliente[];
-  @Input() produto?: Produto;
+  produto?: Produto[];
   @Input() saida?: Saida;
 
-  constructor(private formBuilder: FormBuilder, private router: Router,
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
     private dialogRef: MatDialogRef<SaidaFormComponent>,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    @Inject(MAT_DIALOG_DATA) public produtoSelecionado: Produto
   ) {}
 
   ngOnInit(): void {
     this.criarFormulario();
     this.listarClientes();
 
+    if (this.produtoSelecionado) {
+      this.form.patchValue({
+        quantidade: this.produtoSelecionado.quantidade,
+        venda: this.produtoSelecionado.venda,
+        compra: this.produtoSelecionado.compra,
+      });
 
-    if (this.produto) {
-      this.preencherCamposComProduto(this.produto);
+      this.marcarCamposComoTocados(this.form);
     }
+
+
   }
 
 
   criarFormulario(): void {
     this.form = this.formBuilder.group({
       quantidade: [this.saida?.quantidade || ""],
-      unidadeDacompra: [this.saida?.unidadeDacompra || ""],
-      UnidadeDaVenda: [this.saida?.UnidadeDaVenda || ""],
+      venda: [this.saida?.venda || ""],
+      compra: [this.saida?.compra || ""],
       totalDaVenda: [this.saida?.totalDaVenda || ""] ,
       lucroTransacao: [this.saida?.lucroTransacao || ""],
       cliente: [this.saida?.cliente || ""],
     });
   }
-  preencherCamposComProduto(produto: Produto) {
-    this.form.patchValue({
-      quantidade: produto.quantidade,
-      unidadeDacompra: produto.valorDeCompra,
-      UnidadeDaVenda: produto.valorDaUnidade
-    });
+
+  changeValueProdutoForm():void{
+    const produtoId = this.form.get('produto')?.value;
+    const produtoSelecionado = this.produto?.find(produto => produto.id === produtoId);
+    if(produtoSelecionado){
+      this.form.patchValue({
+        quantidade: produtoSelecionado.quantidade,
+        venda:produtoSelecionado.venda,
+        compra:produtoSelecionado.compra
+      })
+
+    }
   }
-
-
-
-  listarClientes(): void {
-
-    this.clienteService.listarClientes().subscribe((clientes) => {
-      this.clientes = clientes;
-
-    });
-  }
-
   marcarCamposComoTocados(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(campo => {
       const controle = formGroup.get(campo);
@@ -92,6 +97,19 @@ export class SaidaFormComponent implements OnInit{
       }
     });
   }
+
+  atribuirEventos():void{
+
+  }
+
+  listarClientes(): void {
+
+    this.clienteService.listarClientes().subscribe((clientes) => {
+      this.clientes = clientes;
+
+    });
+  }
+
 
   emitterForm(){
     this.envio.emit(this.form.value);

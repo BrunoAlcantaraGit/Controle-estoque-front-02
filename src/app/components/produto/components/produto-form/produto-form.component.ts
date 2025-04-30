@@ -91,8 +91,8 @@ creteForme():void{
   this.form = this.formBuilder.group({
     descricao: [this.produto?this.produto.descricao:""],
     quantidade:[this.produto?this.produto.quantidade:"" ],
-    valorDaUnidade:[this.produto?this.produto.valorDaUnidade:""],
-    valorDeCompra:[this.produto?this.produto.valorDeCompra:""],
+    venda:[this.produto?this.produto.venda:""],
+    compra:[this.produto?this.produto.compra:""],
     marca:[this.produto?this.produto.marca:""],
     codigo:[this.produto?this.produto.codigo:""],
     imagem:[this.produto?this.produto.imagem:""]
@@ -109,8 +109,8 @@ enviar(){
 
   formData.append('descricao', formValue.descricao);
   formData.append('quantidade', formValue.quantidade);
-  formData.append('valorDeCompra', formValue.valorDeCompra);
-  formData.append('valorDaUnidade', formValue.valorDaUnidade);
+  formData.append('venda', formValue.venda);
+  formData.append('compra', formValue.compra);
   formData.append('marca', formValue.marca);
   formData.append('codigo', formValue.codigo);
   formData.append('dataCadastro', formValue.dataCadastro);
