@@ -3,18 +3,19 @@ import{HttpClient} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Cliente,Endereco } from './cliente-taype';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
-
+private baseUrl = environment.url
   constructor(
     private http: HttpClient,
   ) {}
 
-  private url = 'http://localhost:8181/clientes/'
-  private url2 = "http://localhost:8181/endereco/"
+  private url = `${this.baseUrl}/clientes/`
+  private url2 = `${this.baseUrl}/endereco/`
 
   salvar(cliente: Cliente): Observable<Cliente> {
   const token = sessionStorage.getItem('auth-token');

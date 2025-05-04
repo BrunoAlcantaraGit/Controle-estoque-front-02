@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Produto } from './produto.type';
 import{Observable} from 'rxjs'
-
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,9 @@ export class ProdutoService {
     private HttpClient: HttpClient
   ) {}
 
-  private ulr = 'http://localhost:8181/produtos/'
+  private baseUrl = environment.url
+
+  private ulr = `${this.baseUrl}/produtos/`
 
 
   salvar(formeData: FormData): Observable<Produto> {
@@ -23,7 +25,7 @@ export class ProdutoService {
       'Authorization': `Bearer ${token}`,
       //'Content-Type': 'application/json'
     });
-    return this.HttpClient.post<any>(`${this.ulr}salvar`,formeData, { headers });
+    return this.HttpClient.post<Produto>(`${this.ulr}salvar`,formeData, { headers });
   }
 
   listarProdutos(): Observable<Produto[]>{

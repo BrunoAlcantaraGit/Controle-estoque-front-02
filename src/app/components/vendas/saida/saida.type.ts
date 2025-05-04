@@ -10,6 +10,6 @@ compra:number,
 totalDaVenda:number,
 lucroTransacao:number,
 data:Data,
-produtos:Produto[]
+produto:Produto
 cliente:Cliente
 }

@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Saida } from './saida.type';
+import { environment } from '../../../environment';
 @Injectable({
   providedIn: 'root'
 })
 export class SaidaService {
-url = 'http://localhost:8181/saidas/'
+
+baseUrl = environment.url
+
   constructor(
     private http: HttpClient,
   ){}
 
-registrarSaida(saida: Saida): Observable<any> {
+registrarSaida(saida: Saida): Observable<Saida>{
 
   const token = sessionStorage.getItem('auth-token');
   const headers = new HttpHeaders({
@@ -19,8 +22,7 @@ registrarSaida(saida: Saida): Observable<any> {
     'Content-Type': 'application/json'
   });
 
- return this.http.post<any>(this.url, saida);
-
+  return this.http.post<Saida>(`${this.baseUrl}/saidas/salvar`, saida,{headers});
 
 }
 

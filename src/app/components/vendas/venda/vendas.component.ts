@@ -14,7 +14,7 @@ constructor(
   private router: Router
 ){}
 
-  cadastrarCliente(){
+registrarSaida(){
 this.router.navigate(['home/vendas-create']);
   }
   }

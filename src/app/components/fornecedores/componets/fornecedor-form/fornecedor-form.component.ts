@@ -40,7 +40,6 @@ export class FornecedorFormComponent implements OnInit {
     if (this.fornecedor) {
       this.form.patchValue(this.fornecedor);
 
-      // Marca todos os campos do formulário como tocados
       this.marcarCamposComoTocados(this.form);
     }
 
@@ -93,7 +92,7 @@ export class FornecedorFormComponent implements OnInit {
           };
           this.form.get('endereco')?.patchValue(patch);
 
-          // Marca campos como tocados para validação visual
+          
             for (let campo of Object.keys(patch)) {
             const control = this.form.get(`endereco.${campo}`);
             control?.markAsDirty();

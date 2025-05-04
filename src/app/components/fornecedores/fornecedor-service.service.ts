@@ -3,6 +3,7 @@ import { Fornecedor } from './fornecedor.type';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Endereco } from './fornecedor.type';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class FornecedorServiceService {
   constructor(
     private http: HttpClient
   ) {}
-
-private url = 'http://localhost:8181/fornecedores/'
-private url2 = "http://localhost:8181/endereco/"
+private baseUrl = environment.url
+private url = `${this.baseUrl}/fornecedores/`
+private url2 = `${this.baseUrl}/endereco/`
 
 
   cadastrarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {

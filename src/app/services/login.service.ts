@@ -4,13 +4,16 @@ import { HttpClient} from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { LoginResponse } from '../types/loginResponse.type';
 import{RegisterResponse} from '../types/registerResponse.type'
+import { environment } from '../environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
- url = 'http://localhost:8181/auth/';
+private baseUrl = environment.url;
+
+ url = `${this.baseUrl}/auth/`;
   constructor(
     private http: HttpClient
   ) {}

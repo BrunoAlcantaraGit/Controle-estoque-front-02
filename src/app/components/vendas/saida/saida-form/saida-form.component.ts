@@ -46,6 +46,7 @@ export class SaidaFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.criarFormulario();
+    this.listarClientes();
 
     this.form.valueChanges.subscribe(val => {
       const quantidade = Number(val.quantidade);
@@ -54,7 +55,7 @@ export class SaidaFormComponent implements OnInit{
 
       if (!isNaN(quantidade) && !isNaN(compra)) {
         const totalDaVenda = quantidade * compra;
-        this.form.get('totalDaVenda')?.setValue(totalDaVenda, { emitEvent: false });
+        this.form.get('totalDaVenda')?.setValue(totalDaVenda, {emitEvent: false });
       }
 
       if (!isNaN(quantidade) && !isNaN(venda) && !isNaN(venda)) {
@@ -63,10 +64,11 @@ export class SaidaFormComponent implements OnInit{
       }
     });
 
-    this.listarClientes();
+
 
     if (this.produtoSelecionado) {
       this.form.patchValue({
+        produto: this.produtoSelecionado.id,
         quantidade: this.produtoSelecionado.quantidade,
         venda: this.produtoSelecionado.venda,
         compra: this.produtoSelecionado.compra,
@@ -80,20 +82,19 @@ export class SaidaFormComponent implements OnInit{
 
   criarFormulario(): void {
     this.form = this.formBuilder.group({
-      quantidade: [
-        this.saida?.quantidade || '',
-        [
-          Validators.required,
-          Validators.min(1),
-          Validators.max(this.produtoSelecionado?.quantidade || 0)
-        ]
-      ],
+      quantidade: [this.saida?.quantidade || '',Validators.required],
       venda: [this.saida?.venda || '', Validators.required],
       compra: [this.saida?.compra || '', Validators.required],
-      totalDaVenda: [{ value: this.saida?.totalDaVenda || '', disabled: true }],
-      lucroTransacao: [{ value: this.saida?.lucroTransacao || '', disabled: true }],
+      totalDaVenda: [this.saida?.totalDaVenda || '',  Validators.required],
+      lucroTransacao: [ this.saida?.lucroTransacao || '' ,Validators.required],
       cliente: [this.saida?.cliente || '', Validators.required],
+      produto: [this.saida?.produto || '', Validators.required]
     });
+  }
+
+  emitterForm(){
+    console.log(this.form.value,);
+    this.envio.emit(this.form.value);
   }
 
 
@@ -115,16 +116,12 @@ export class SaidaFormComponent implements OnInit{
 
   listarClientes(): void {
 
-    this.clienteService.listarClientes().subscribe((clientes) => {
+     this.clienteService.listarClientes().subscribe((clientes) => {
       this.clientes = clientes;
 
     });
   }
 
-
-  emitterForm(){
-    this.envio.emit(this.form.value);
-  }
 
 
  cancelar(){

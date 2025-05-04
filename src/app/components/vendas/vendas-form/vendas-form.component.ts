@@ -18,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog'
 import { Produto } from '../../produto/produto.type';
 import { SaidaReadComponent } from "../saida/saida-read/saida-read.component";
 import { SaidaFormComponent } from '../saida/saida-form/saida-form.component';
+import { VendasReadComponent } from "../vendas-read/vendas-read.component";
+import { RegistroDeSaidasReadComponent } from "../registro-de-saidas-read/registro-de-saidas-read.component";
 
 @Component({
   selector: 'app-vendas-form',
@@ -32,7 +34,8 @@ import { SaidaFormComponent } from '../saida/saida-form/saida-form.component';
     AutoCompleteModule,
     MatSelectModule,
     SaidaReadComponent,
-    SaidaFormComponent
+    SaidaFormComponent,
+    RegistroDeSaidasReadComponent
 ],
   templateUrl: './vendas-form.component.html',
   styleUrls: ['./vendas-form.component.scss']
@@ -68,11 +71,7 @@ export class VendasFormComponent implements OnInit {
   }
 
 
-  criarFormulario(): void {
-    this.form = this.formBuilder.group({
-
-    });
-  }
+criarFormulario(): void {}
 
 openSaidaForm(produto: Produto) {
   const dialogRef = this.dialog.open(SaidaFormComponent, {
@@ -87,26 +86,13 @@ openSaidaForm(produto: Produto) {
   });
 }
 
-  marcarCamposComoTocados(formGroup: FormGroup): void {
-    Object.keys(formGroup.controls).forEach(campo => {
-      const controle = formGroup.get(campo);
-      if (controle instanceof FormGroup) {
-        this.marcarCamposComoTocados(controle);
-      } else {
-        controle?.markAsTouched();
-        controle?.markAsDirty();
-        controle?.updateValueAndValidity();
-      }
-    });
-  }
-
 
   enviar(): void {
 
   }
 
   cancelar(){
-   this.dialogRef?.close();
+
   }
 
 }
