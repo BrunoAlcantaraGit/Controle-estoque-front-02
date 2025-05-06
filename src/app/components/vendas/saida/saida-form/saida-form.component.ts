@@ -10,12 +10,15 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { Cliente } from '../../../Clientes/cliente-taype';
 import { ClienteService } from '../../../Clientes/cliente.service';
 import { Saida } from '../saida.type';
-import { max } from 'rxjs';
 
+
+import { ProdutoService } from '../../../produto/produto.service';
+import { SaidaService } from '../saida.service';
 
 
 
@@ -30,23 +33,29 @@ export class SaidaFormComponent implements OnInit{
   text = "Registar Saida"
   cancel = "Cancelar"
 
-  @Output() envio = new EventEmitter()
   @Output() eventCancel = new EventEmitter()
   @Input() clientes?: Cliente[];
-  produto?: Produto[];
+  produto?: Produto;
+
   @Input() saida?: Saida;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private dialogRef: MatDialogRef<SaidaFormComponent>,
     private clienteService: ClienteService,
+    private produtoService: ProdutoService,
+    private saidaService: SaidaService,
+    private toastrService: ToastrService,
     @Inject(MAT_DIALOG_DATA) public produtoSelecionado: Produto
   ) {}
 
   ngOnInit(): void {
     this.criarFormulario();
     this.listarClientes();
+
+
 
     this.form.valueChanges.subscribe(val => {
       const quantidade = Number(val.quantidade);
@@ -66,7 +75,10 @@ export class SaidaFormComponent implements OnInit{
 
 
 
-    if (this.produtoSelecionado) {
+     if (this.produtoSelecionado) {
+
+       this.produto = this.produtoSelecionado;
+
       this.form.patchValue({
         produto: this.produtoSelecionado.id,
         quantidade: this.produtoSelecionado.quantidade,
@@ -92,10 +104,42 @@ export class SaidaFormComponent implements OnInit{
     });
   }
 
-  emitterForm(){
-    console.log(this.form.value,);
-    this.envio.emit(this.form.value);
-  }
+
+
+    registrarSaida(saida: Saida) {
+      console.log(saida);
+      if (!this.produto?.id) return;
+
+        const quantidadeAtual = this.produto.quantidade;
+
+        if (quantidadeAtual >= saida.quantidade) {
+          const novaQuantidade = quantidadeAtual - saida.quantidade;
+          const produtoAtualizado = { ...this.produto, quantidade: novaQuantidade };
+          const formData = new FormData();
+          formData.append('quantidade', produtoAtualizado.quantidade.toString());
+          formData.append('descricao', produtoAtualizado.descricao);
+          formData.append('marca', produtoAtualizado.marca);
+          formData.append('codigo', produtoAtualizado.codigo);
+          formData.append('venda', produtoAtualizado.venda.toString());
+          formData.append('compra', produtoAtualizado.compra.toString());
+          formData.append('imagem', produtoAtualizado.imagem);
+
+
+          this.produtoService.editarProduto(this.produto.id, formData).subscribe(() => {
+
+            this.toastrService.success('Saida registrada com sucesso!', 'Sucesso');
+            this.saidaService.registrarSaida(saida).subscribe(() => {
+              this.dialogRef.close();
+              window.location.reload();
+              this.router.navigate(['home/vendas-form']);
+            });
+          });
+
+        } else {
+          this.toastrService.error('Quantidade insuficiente em estoque', 'Erro');
+        }
+      }
+
 
 
   marcarCamposComoTocados(formGroup: FormGroup) {

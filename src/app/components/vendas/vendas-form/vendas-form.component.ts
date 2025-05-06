@@ -34,7 +34,6 @@ import { RegistroDeSaidasReadComponent } from "../registro-de-saidas-read/regist
     AutoCompleteModule,
     MatSelectModule,
     SaidaReadComponent,
-    SaidaFormComponent,
     RegistroDeSaidasReadComponent
 ],
   templateUrl: './vendas-form.component.html',
