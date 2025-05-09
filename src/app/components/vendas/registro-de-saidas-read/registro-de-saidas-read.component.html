@@ -1,26 +1,30 @@
 <div class="card">
-  <p-table [value]="saidas" [(selection)]="selectedProducts" dataKey="code" [tableStyle]="{'min-width': '50rem'}">
-      <ng-template #header>
-          <tr>
-              <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-              <th>Quantidade</th>
-              <th>Produto</th>
-              <th>Cliente</th>
-              <th>Lucro</th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-saidas>
-          <tr>
-              <td>
-                  <p-tableCheckbox [value]="saidas" />
-              </td>
-              <td>{{saidas.quantidade}}</td>
-               <td>{{saidas.produto.descricao}}</td>
-               <td>{{saidas.cliente.nome}}</td>
-              <td>{{saidas.lucroTransacao}}</td>
+    <p-table [value]="saidas" [(selection)]="selectedProducts" dataKey="code" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+                <th>Quantidade</th>
+                <th>Produto</th>
+                <th>Cliente</th>
+                <th>valor da venda</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-saida>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="saida" />
+                </td>
+                <td>{{saida.quantidade}}</td>
+                <td>{{saida.produto}}</td>
+                <td>{{saida.cliente}}</td>
+                <td>{{saida.totalDaVenda}}</td>
 
-
-          </tr>
-      </ng-template>
-  </p-table>
+                <td> <button mat-icon-button style="color: red;"
+              (click)="excluirRegistroSaida(saida.id); $event.stopPropagation()"
+              >
+                <i class="material-icons red">delete</i>
+            </button></td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

@@ -8,6 +8,8 @@
   padding: 2rem;
 }
 
+.h3{margin-bottom: 10px;
+padding-bottom: 10px;}
 
 p-floatlabel {
   display: flex;
@@ -105,3 +107,14 @@ ul {
   overflow-y: auto; /* ativar rolagem */
 }
 
+.card-register{
+  padding: 10px;
+  border-radius: solid 10px;
+  border-color: #000000;
+}
+
+.card-saida{
+  padding: 10px;
+  border-radius: solid 10px;
+  border-color: #000000;
+}

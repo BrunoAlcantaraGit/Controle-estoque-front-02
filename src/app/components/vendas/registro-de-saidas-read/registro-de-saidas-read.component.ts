@@ -6,18 +6,21 @@ import { CommonModule } from '@angular/common';
 
 import { Saida } from './../saida/saida.type';
 import { SaidaService } from './../saida/saida.service';
+import { ProdutoService } from '../../produto/produto.service';
 
 
 @Component({
   selector: 'app-registro-de-saidas-read',
   imports: [TableModule,FormsModule,CommonModule],
   templateUrl: './registro-de-saidas-read.component.html',
-  styleUrl: './registro-de-saidas-read.component.scss'
+  styleUrl: './registro-de-saidas-read.component.scss',
+  providers: [ProdutoService]
+
 })
 export class RegistroDeSaidasReadComponent implements OnInit {
 
   saidas: Saida[] = []
-  selectedProducts!: Saida;
+  selectedProducts!: Saida[];
 
 
   constructor(
@@ -30,5 +33,7 @@ export class RegistroDeSaidasReadComponent implements OnInit {
     });
 
 }
+
+excluirRegistroSaida(id:number){}
 
 }
