@@ -1,1 +1,26 @@
-<p>registro-de-saidas-read works!</p>
+<div class="card">
+  <p-table [value]="saidas" [(selection)]="selectedProducts" dataKey="code" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template #header>
+          <tr>
+              <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+              <th>Quantidade</th>
+              <th>Produto</th>
+              <th>Cliente</th>
+              <th>Lucro</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-saidas>
+          <tr>
+              <td>
+                  <p-tableCheckbox [value]="saidas" />
+              </td>
+              <td>{{saidas.quantidade}}</td>
+               <td>{{saidas.produto.descricao}}</td>
+               <td>{{saidas.cliente.nome}}</td>
+              <td>{{saidas.lucroTransacao}}</td>
+
+
+          </tr>
+      </ng-template>
+  </p-table>
+</div>

@@ -48,7 +48,7 @@ login(){
 
     next:(value) => {this.toastService.success("Login efetuado com sucesso")
       sessionStorage.setItem('auth-token', value.token)
-      this.Router.navigate(['home']);
+      this.Router.navigate(['home/painel']);
     },
 
     error:(error) => this.toastService.error("Usuário não existe, ou credênciais inválidas"),

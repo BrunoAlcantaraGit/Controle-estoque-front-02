@@ -26,4 +26,15 @@ registrarSaida(saida: Saida): Observable<Saida>{
 
 }
 
+
+listar():Observable<Saida[]>{
+
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  return this.http.get<Saida[]>(`${this.baseUrl}/saidas/listar`,{headers});
+}
+
 }
