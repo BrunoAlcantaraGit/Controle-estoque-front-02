@@ -1,30 +1,54 @@
-<div class="card">
-    <p-table [value]="saidas" [(selection)]="selectedProducts" dataKey="code" [tableStyle]="{'min-width': '50rem'}">
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-                <th>Quantidade</th>
-                <th>Produto</th>
-                <th>Cliente</th>
-                <th>valor da venda</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-saida>
-            <tr>
-                <td>
-                    <p-tableCheckbox [value]="saida" />
-                </td>
-                <td>{{saida.quantidade}}</td>
-                <td>{{saida.produto}}</td>
-                <td>{{saida.cliente}}</td>
-                <td>{{saida.totalDaVenda}}</td>
+ <table mat-table [dataSource]="saidas" class="mat-elevation-z2" style="width: 100%;">
 
-                <td> <button mat-icon-button style="color: red;"
-              (click)="excluirRegistroSaida(saida.id); $event.stopPropagation()"
-              >
-                <i class="material-icons red">delete</i>
-            </button></td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
+
+      <ng-container matColumnDef="selecionado">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="selecionarTodos($event.checked)"
+            [checked]="todosSelecionados()"
+            [indeterminate]="indeterminado()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let saida">
+          <mat-checkbox [(ngModel)]="saida.selecionado"></mat-checkbox>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="quantidade">
+        <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+        <td mat-cell *matCellDef="let saida">{{saida.quantidade}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="produto">
+        <th mat-header-cell *matHeaderCellDef>Produto</th>
+        <td mat-cell *matCellDef="let saida">{{saida.produto}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+        <td mat-cell *matCellDef="let saida">{{saida.cliente}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="totalDaVenda">
+        <th mat-header-cell *matHeaderCellDef>Valor da Venda</th>
+        <td mat-cell *matCellDef="let saida">R$ {{saida.totalDaVenda}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let saida">
+          <button mat-icon-button color="warn" (click)="excluirRegistroSaida(saida.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+    </table>
+
+<div class="actions">

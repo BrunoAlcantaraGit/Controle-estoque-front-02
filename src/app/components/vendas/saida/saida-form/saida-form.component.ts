@@ -35,8 +35,7 @@ export class SaidaFormComponent implements OnInit{
 
   @Output() eventCancel = new EventEmitter()
   @Input() clientes?: Cliente[];
-  produto?: Produto;
-
+  produto?: Produto
   @Input() saida?: Saida;
 
 
@@ -54,7 +53,6 @@ export class SaidaFormComponent implements OnInit{
   ngOnInit(): void {
     this.criarFormulario();
     this.listarClientes();
-
 
 
     this.form.valueChanges.subscribe(val => {
@@ -112,7 +110,7 @@ export class SaidaFormComponent implements OnInit{
 
         const quantidadeAtual = this.produto.quantidade;
 
-        if (quantidadeAtual >= saida.quantidade) {
+        if (quantidadeAtual >= saida.quantidade && quantidadeAtual >= 0) {
           const novaQuantidade = quantidadeAtual - saida.quantidade;
           const produtoAtualizado = { ...this.produto, quantidade: novaQuantidade };
           const formData = new FormData();
@@ -128,7 +126,9 @@ export class SaidaFormComponent implements OnInit{
           this.produtoService.editarProduto(this.produto.id, formData).subscribe(() => {
 
             this.toastrService.success('Saida registrada com sucesso!', 'Sucesso');
+
             this.saidaService.registrarSaida(saida).subscribe(() => {
+
               this.dialogRef.close();
               window.location.reload();
               this.router.navigate(['home/vendas-form']);

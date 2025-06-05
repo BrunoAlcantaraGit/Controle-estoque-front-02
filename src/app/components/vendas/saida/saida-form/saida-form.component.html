@@ -2,7 +2,7 @@
 
   <div class="input-wrepper">
    <p-floatlabel variant="in">
-     <input matInput formControlName="quantidade" id="quantidade" type="number">
+     <input matInput formControlName="quantidade" id="quantidade" type="number" [value]="produto?.quantidade" required>
      <label for="quantidade">Quantidade de produto</label>
    </p-floatlabel>
 

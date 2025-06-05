@@ -12,4 +12,5 @@ lucroTransacao:number,
 data:Data,
 produto:Produto
 cliente:Cliente
+selecionado?: boolean;
 }
