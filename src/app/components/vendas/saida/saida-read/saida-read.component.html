@@ -17,7 +17,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-produtos>
-        <tr (click)="registrarSaida(produtos.id)">
+        <tr (click)="openSaida(produtos.id)">
 
             <td><img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" /></td>
             <td>{{ produtos.descricao }}</td>

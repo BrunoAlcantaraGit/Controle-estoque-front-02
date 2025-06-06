@@ -1,4 +1,4 @@
- <table mat-table [dataSource]="saidas" class="mat-elevation-z2" style="width: 100%;">
+ <table mat-table  [dataSource]="saidas" class="mat-elevation-z2" style="width: 100%;">
 
 
       <ng-container matColumnDef="selecionado">
@@ -41,7 +41,7 @@
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let saida">
-          <button mat-icon-button color="warn" (click)="excluirRegistroSaida(saida.id)">
+          <button mat-icon-button style="color: red;" (click)="excluirRegistroSaida(saida.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

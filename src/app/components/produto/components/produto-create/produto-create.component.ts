@@ -24,6 +24,7 @@ export class ProdutoCreateComponent {
   ){}
 
   enviar(formData:FormData){
+
     console.log(formData)
     this.produtoService.salvar(formData).subscribe({
       next: () => {

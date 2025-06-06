@@ -40,8 +40,7 @@ export class SaidaReadComponent {
 
 
 
-    registrarSaida(id:number){
-      console.log("id clicado", id);
+    openSaida(id:number){
       this.produtoService.buscarProduto(id).subscribe(produto => {
         const dialogRef = this.dialog.open(SaidaFormComponent, {
           data: produto,
