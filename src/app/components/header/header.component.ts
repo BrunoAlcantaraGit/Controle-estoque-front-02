@@ -16,7 +16,7 @@ constructor(
   private toastService: ToastrService
 ){}
 
- @Input() text = 'Logout';
+ @Input() text = 'Sair';
 
  logout(){
   sessionStorage.removeItem('auth-token')
