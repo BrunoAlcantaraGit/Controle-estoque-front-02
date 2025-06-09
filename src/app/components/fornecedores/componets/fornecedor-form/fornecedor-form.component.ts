@@ -92,7 +92,7 @@ export class FornecedorFormComponent implements OnInit {
           };
           this.form.get('endereco')?.patchValue(patch);
 
-          
+
             for (let campo of Object.keys(patch)) {
             const control = this.form.get(`endereco.${campo}`);
             control?.markAsDirty();
@@ -109,7 +109,7 @@ export class FornecedorFormComponent implements OnInit {
   }
 
   cancelar(): void {
-    this.cancelarEnvio.emit(); // Evita router direto aqui, quem chama decide
+    this.cancelarEnvio.emit(); 
   }
 
 }

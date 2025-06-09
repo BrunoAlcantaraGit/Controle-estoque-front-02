@@ -37,4 +37,8 @@ constructor(
 
   }
 
+  fechar() {
+    this.router.navigate(['home/fornecedores']);
+  } 
+
 }

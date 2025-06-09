@@ -16,7 +16,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-fornecedor>
-        <tr (click)="editarFornecedor(fornecedor.id)">
+        <tr>
 
             <td>{{ fornecedor.nome}}</td>
             <td>{{ fornecedor.documento }}</td>
@@ -29,6 +29,12 @@
               >
                 <i class="material-icons red">delete</i>
             </button>
+              <button mat-icon-button style="color: rgb(0, 4, 255);"
+              (click)="editarFornecedor(fornecedor.id); $event.stopPropagation()"
+              >
+                <i class="material-icons red">edit</i>
+            </button>
+
             </td>
         </tr>
     </ng-template>
