@@ -26,7 +26,7 @@
 
 :host ::ng-deep .p-datatable tbody tr:hover {
   background-color: #f9f9f9;
-  cursor: pointer;
+
 }
 
 :host ::ng-deep .p-paginator {
@@ -83,18 +83,11 @@
   color: white;
   font-weight: bold;
 }
-.button-wrapper{
-  display: flex;
 
-  button{
-    background-color: #ffffff;
-    border: none ;
-    padding:5px;
-  }
-  button:hover{
-    cursor: pointer;
-    background-color: #F4F4F4;
-  }
+button{
+  cursor: pointer;
+  background-color: #F9F9F9;
+  border: none;
 }
 
 

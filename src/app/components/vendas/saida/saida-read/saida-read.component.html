@@ -11,21 +11,28 @@
             <th style="width:20%">Foto</th>
             <th style="width: 20%;">descricao</th>
             <th style="width:20%">quantidade</th>
-            <th style="width:20%">valor da compra</th>
             <th style="width:20%">valor da venda</th>
+            <th style="width:20%">valor da compra</th>
 
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-produtos>
-        <tr (click)="openSaida(produtos.id)">
+        <tr >
 
             <td><img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" /></td>
             <td>{{ produtos.descricao }}</td>
             <td>{{ produtos.quantidade }}</td>
             <td>{{ produtos.venda }}</td>
             <td>{{ produtos.compra }}</td>
+            <td>
+                <button mat-icon-button style="color: #7001FD"
+                        (click)="openSaida(produtos.id); $event.stopPropagation()">
+                    <i class="material-icons ">add_shopping_cart</i>
+                </button>
 
-
+            </td>
         </tr>
+
+
     </ng-template>
 </p-table>
