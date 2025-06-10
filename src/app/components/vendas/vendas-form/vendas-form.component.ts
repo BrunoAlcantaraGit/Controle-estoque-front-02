@@ -11,6 +11,11 @@ import{MatSelectModule} from '@angular/material/select';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Inject,Optional } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 
@@ -18,7 +23,6 @@ import { MatDialog } from '@angular/material/dialog'
 import { Produto } from '../../produto/produto.type';
 import { SaidaReadComponent } from "../saida/saida-read/saida-read.component";
 import { SaidaFormComponent } from '../saida/saida-form/saida-form.component';
-import { VendasReadComponent } from "../vendas-read/vendas-read.component";
 import { RegistroDeSaidasReadComponent } from "../registro-de-saidas-read/registro-de-saidas-read.component";
 
 @Component({
@@ -34,7 +38,11 @@ import { RegistroDeSaidasReadComponent } from "../registro-de-saidas-read/regist
     AutoCompleteModule,
     MatSelectModule,
     SaidaReadComponent,
-    RegistroDeSaidasReadComponent
+    RegistroDeSaidasReadComponent,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatIconModule,
 ],
   templateUrl: './vendas-form.component.html',
   styleUrls: ['./vendas-form.component.scss']

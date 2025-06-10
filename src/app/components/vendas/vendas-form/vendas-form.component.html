@@ -1,14 +1,23 @@
-
-<h3>Selecione os produtos</h3>
+<div class="container">
+<h3>Selecione os produtos</h3> 
+<section>
+  <div class="example-label"></div>
+  <div class="example-button-row">
+    <div class="example-flex-container">
+      <button matIconButton aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+     
+    </div>
+  </div>
+</section>
+</div>
 <div class="card-saida">
   <app-saida-read (eventCancel)="cancelar()"></app-saida-read>
 </div>
 
-<h3>Registro de Saídas</h3>
 
-<div class="card-register">
-<app-registro-de-saidas-read></app-registro-de-saidas-read>
-</div>
+
 
 
 

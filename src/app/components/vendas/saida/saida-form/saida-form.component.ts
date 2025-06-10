@@ -110,7 +110,7 @@ export class SaidaFormComponent implements OnInit{
 
         const quantidadeAtual = this.produto.quantidade;
 
-        if (quantidadeAtual >= saida.quantidade && saida.quantidade >= 0) {
+        if (quantidadeAtual >= saida.quantidade && saida.quantidade > 0) {
           const novaQuantidade = quantidadeAtual - saida.quantidade;
           const produtoAtualizado = { ...this.produto, quantidade: novaQuantidade };
           const formData = new FormData();

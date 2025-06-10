@@ -1,11 +1,11 @@
 import { routes } from './../../../app.routes';
 import { Component } from '@angular/core';
-import { VendasReadComponent } from '../vendas-read/vendas-read.component';
+import { RegistroDeSaidasReadComponent } from '../registro-de-saidas-read/registro-de-saidas-read.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendas',
-  imports: [VendasReadComponent],
+  imports: [RegistroDeSaidasReadComponent],
   templateUrl: './vendas.component.html',
   styleUrl: './vendas.component.scss'
 })

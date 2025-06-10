@@ -8,4 +8,5 @@ export interface Produto{
   marca: string,
   codigo: string
   dataCadastro: Date
+  selecionado?: boolean;
 }
