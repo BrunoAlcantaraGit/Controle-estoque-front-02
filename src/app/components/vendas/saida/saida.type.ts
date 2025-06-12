@@ -10,7 +10,7 @@ compra:number,
 totalDaVenda:number,
 lucroTransacao:number,
 data:Data,
-produto:Produto
+produtos:Produto[]
 cliente:Cliente
 selecionado?: boolean;
 }

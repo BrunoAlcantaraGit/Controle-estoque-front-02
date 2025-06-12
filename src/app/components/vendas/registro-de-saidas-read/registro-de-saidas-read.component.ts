@@ -5,11 +5,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-
+import{ToastrService} from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 import { Saida } from './../saida/saida.type';
 import { SaidaService } from './../saida/saida.service';
 import { ProdutoService } from '../../produto/produto.service';
+import { Produto } from '../../produto/produto.type';
 
 
 @Component({
@@ -25,9 +27,14 @@ export class RegistroDeSaidasReadComponent implements OnInit {
   saidas: Saida[] = []
   selectedProducts!: Saida[];
   colunas: string[] = ['selecionado', 'quantidade', 'produto', 'cliente', 'totalDaVenda', 'acoes'];
- selecionado?: boolean;
+  selecionado?: boolean;
+  produto?: Produto
   constructor(
-   private saidaService : SaidaService
+   private saidaService : SaidaService,
+   private produtoService: ProdutoService,
+   private toastrService: ToastrService,
+   private router: Router
+
   ){}
   ngOnInit() {
     this.saidaService.listar().subscribe((data) => {
@@ -35,6 +42,10 @@ export class RegistroDeSaidasReadComponent implements OnInit {
         console.log(this.saidas);
     });
 
+}
+
+gerarOrcamento(){
+  this.router.navigate(['home/vendas-create']);
 }
 
  todosSelecionados(): boolean {
@@ -50,9 +61,10 @@ export class RegistroDeSaidasReadComponent implements OnInit {
   }
   verSelecionados(): void {
     const selecionados = this.saidas.filter(s => s.selecionado);
-    alert(`Selecionados: ${selecionados.map(s => s.produto).join(', ') || 'Nenhum'}`);
+    alert(`Selecionados: ${selecionados.map(s => s.produtos).join(', ') || 'Nenhum'}`);
   }
 
-excluirRegistroSaida(id:number){}
+  excluirRegistroSaida(id:number){}
+
 
 }

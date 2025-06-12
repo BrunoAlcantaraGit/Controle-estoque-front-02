@@ -98,7 +98,7 @@ export class SaidaFormComponent implements OnInit{
       totalDaVenda: [this.saida?.totalDaVenda || '',  Validators.required],
       lucroTransacao: [ this.saida?.lucroTransacao || '' ,Validators.required],
       cliente: [this.saida?.cliente || '', Validators.required],
-      produto: [this.saida?.produto || '', Validators.required]
+      produto: [this.saida?.produtos || '', Validators.required]
     });
   }
 
@@ -130,8 +130,8 @@ export class SaidaFormComponent implements OnInit{
             this.saidaService.registrarSaida(saida).subscribe(() => {
 
               this.dialogRef.close();
-              window.location.reload();
-              this.router.navigate(['home/vendas-form']);
+              //window.location.reload();
+              this.router.navigate(['home/orcamento']);
             });
           });
 

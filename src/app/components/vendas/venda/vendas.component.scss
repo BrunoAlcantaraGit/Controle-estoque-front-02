@@ -1,8 +1,15 @@
 @import "../../../../styles/variables.scss";
 
-button {
+
+
+.container {
   display: flex;
-  justify-content: end;
+  flex-direction: column;
+  padding: 20px;
+
+  button {
+  display: flex;
+  align-self: self-end;
   background-color: $primary-color;
   color: white;
   border: none;
@@ -13,6 +20,7 @@ button {
   transition: background-color 0.2s;
   margin-left: 5px;
   margin-bottom: 10px;
+}
 }
 
 button[type="submit"]:hover {

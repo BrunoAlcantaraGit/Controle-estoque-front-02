@@ -24,6 +24,8 @@ import { Produto } from '../../produto/produto.type';
 import { SaidaReadComponent } from "../saida/saida-read/saida-read.component";
 import { SaidaFormComponent } from '../saida/saida-form/saida-form.component';
 import { RegistroDeSaidasReadComponent } from "../registro-de-saidas-read/registro-de-saidas-read.component";
+import { ProdutoReadComponent } from "../../produto/components/produto-read/produto-read.component";
+import { ProdutoService } from '../../produto/produto.service';
 
 @Component({
   selector: 'app-vendas-form',
@@ -43,6 +45,7 @@ import { RegistroDeSaidasReadComponent } from "../registro-de-saidas-read/regist
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    ProdutoReadComponent
 ],
   templateUrl: './vendas-form.component.html',
   styleUrls: ['./vendas-form.component.scss']
@@ -62,6 +65,7 @@ export class VendasFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
+    private produtoService: ProdutoService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any = null,
     @Optional() private dialogRef?: MatDialogRef<VendasFormComponent>,
 
@@ -80,17 +84,23 @@ export class VendasFormComponent implements OnInit {
 
 criarFormulario(): void {}
 
-openSaidaForm(produto: Produto) {
-  const dialogRef = this.dialog.open(SaidaFormComponent, {
-    data: produto
-  });
+openSaidaForm(id:number) {
+  
+  this.produtoService.buscarProduto(id).subscribe(produto => {
+        const dialogRef = this.dialog.open(SaidaFormComponent, {
+          data: produto,
+          disableClose: true
+        })
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      console.log('Saída registrada', result);
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+          this.produtoService.listarProdutos().subscribe(produtos => this.produtos = produtos);
 
-    }
-  });
+          }
+
+
+      })
+    })
 }
 
 

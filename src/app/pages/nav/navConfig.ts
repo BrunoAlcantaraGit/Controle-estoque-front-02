@@ -17,6 +17,11 @@ export const navConfig: naveDate[] = [
     icon: 'pi-shopping-bag',
      routeURL: 'produtos' },
 
+{ title: 'Orçamentos',
+   icon: 'pi-window-maximize',
+  routeURL: 'orcamento'
+ },
+
 { title: 'Vendas',
    icon: 'pi-window-maximize',
   routeURL: 'vendas'
