@@ -20,7 +20,7 @@ import { VendasComponent} from './components/vendas/venda/vendas.component';
 import { VendasCreateComponent } from './components/vendas/vendas-create/vendas-create.component';
 import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
 import { VendasFormComponent } from './components/vendas/vendas-form/vendas-form.component';
-import { RegistroDeSaidasReadComponent } from './components/vendas/registro-de-saidas-read/registro-de-saidas-read.component';
+import { RegistroDeSaidasReadComponent } from './components/vendas/registro-de-orcamento-read/registro-de-orcamento.component';
 
 import { PainelComponent} from './components/painel-saidas/components/painel/painel.component';
 import{ PainelReadComponent } from './components/painel-saidas/components/painel-read/painel-read.component';

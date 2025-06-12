@@ -11,15 +11,15 @@ import{ActivatedRoute} from '@angular/router';
 import { Produto} from '../../../produto/produto.type';
 import { ProdutoService } from '../../../produto/produto.service';
 import { VendasFormComponent } from '../../vendas-form/vendas-form.component';
-import { SaidaFormComponent } from '../saida-form/saida-form.component';
+import { OrcamentoFormComponent } from '../orcamento-form/orcamento-form.component';
 
 @Component({
-  selector: 'app-saida-read',
+  selector: 'app-orcamento-read',
   imports: [MatDialogModule, MatIconModule,  TableModule, CommonModule],
-  templateUrl: './saida-read.component.html',
-  styleUrl: './saida-read.component.scss'
+  templateUrl: './orcamento-read.component.html',
+  styleUrl: './orcamento-read.component.scss'
 })
-export class SaidaReadComponent {
+export class OrcamentoReadComponent implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
@@ -48,9 +48,9 @@ registrarSaida(){}
 
 
 
-    openSaida(id:number){
+    openOrcamento(id:number){
       this.produtoService.buscarProduto(id).subscribe(produto => {
-        const dialogRef = this.dialog.open(SaidaFormComponent, {
+        const dialogRef = this.dialog.open(OrcamentoFormComponent, {
           data: produto,
           disableClose: true
         })

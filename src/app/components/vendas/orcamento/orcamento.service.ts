@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Saida } from './saida.type';
+import { Saida } from './orcamento.type';
 import { environment } from '../../../environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SaidaService {
+export class OrcamentoService {
 
 baseUrl = environment.url
 

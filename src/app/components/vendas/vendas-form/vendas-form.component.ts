@@ -21,9 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
 
 
 import { Produto } from '../../produto/produto.type';
-import { SaidaReadComponent } from "../saida/saida-read/saida-read.component";
-import { SaidaFormComponent } from '../saida/saida-form/saida-form.component';
-import { RegistroDeSaidasReadComponent } from "../registro-de-saidas-read/registro-de-saidas-read.component";
+import { OrcamentoReadComponent } from './../orcamento/orcamento-read/orcamento-read.component';
+import { OrcamentoFormComponent } from './../orcamento/orcamento-form/orcamento-form.component';
+import { RegistroDeSaidasReadComponent } from "../registro-de-orcamento-read/registro-de-orcamento.component";
 import { ProdutoReadComponent } from "../../produto/components/produto-read/produto-read.component";
 import { ProdutoService } from '../../produto/produto.service';
 
@@ -39,7 +39,7 @@ import { ProdutoService } from '../../produto/produto.service';
     DropdownModule,
     AutoCompleteModule,
     MatSelectModule,
-    SaidaReadComponent,
+    OrcamentoReadComponent,
     RegistroDeSaidasReadComponent,
     MatTableModule,
     MatCheckboxModule,
@@ -85,9 +85,9 @@ export class VendasFormComponent implements OnInit {
 criarFormulario(): void {}
 
 openSaidaForm(id:number) {
-  
+
   this.produtoService.buscarProduto(id).subscribe(produto => {
-        const dialogRef = this.dialog.open(SaidaFormComponent, {
+        const dialogRef = this.dialog.open(OrcamentoFormComponent, {
           data: produto,
           disableClose: true
         })

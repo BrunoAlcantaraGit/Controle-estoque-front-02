@@ -16,7 +16,6 @@
             <th style="width:20%">valor da compra</th>
              <th style="width:20%">ações</th>
 
-
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-produtos>
@@ -29,7 +28,7 @@
             <td>{{ produtos.compra }}</td>
             <td>
                 <button mat-icon-button style="color: #7001FD"
-                        (click)="openSaida(produtos.id); $event.stopPropagation()">
+                        (click)="openOrcamento(produtos.id); $event.stopPropagation()">
                     <i class="material-icons ">add_shopping_cart</i>
                 </button>
 

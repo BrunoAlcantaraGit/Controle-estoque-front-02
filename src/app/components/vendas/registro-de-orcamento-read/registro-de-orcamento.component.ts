@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 import{ToastrService} from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-import { Saida } from './../saida/saida.type';
-import { SaidaService } from './../saida/saida.service';
+import { Saida } from '../orcamento/orcamento.type';
+import { OrcamentoService } from '../orcamento/orcamento.service';
 import { ProdutoService } from '../../produto/produto.service';
 import { Produto } from '../../produto/produto.type';
 
@@ -17,8 +17,8 @@ import { Produto } from '../../produto/produto.type';
 @Component({
   selector: 'app-registro-de-saidas-read',
   imports: [MatTableModule,MatCheckboxModule,MatButtonModule,MatIconModule,FormsModule,CommonModule],
-  templateUrl: './registro-de-saidas-read.component.html',
-  styleUrl: './registro-de-saidas-read.component.scss',
+  templateUrl: './registro-de-orcamento.component.html',
+  styleUrl: './registro-de-orcamento.component.scss',
   providers: [ProdutoService]
 
 })
@@ -30,14 +30,14 @@ export class RegistroDeSaidasReadComponent implements OnInit {
   selecionado?: boolean;
   produto?: Produto
   constructor(
-   private saidaService : SaidaService,
+   private orcamentoService : OrcamentoService,
    private produtoService: ProdutoService,
    private toastrService: ToastrService,
    private router: Router
 
   ){}
   ngOnInit() {
-    this.saidaService.listar().subscribe((data) => {
+    this.orcamentoService.listar().subscribe((data) => {
         this.saidas = data;
         console.log(this.saidas);
     });

@@ -1,4 +1,5 @@
-import { Produto } from './../../../produto/produto.type';
+import { NgModule } from '@angular/core';
+import { Produto } from '../../../produto/produto.type';
 
 import { Component, OnInit, Input, Output} from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule,Validators } from '@angular/forms';
@@ -14,23 +15,23 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Cliente } from '../../../Clientes/cliente-taype';
 import { ClienteService } from '../../../Clientes/cliente.service';
-import { Saida } from '../saida.type';
+import { Saida } from '../orcamento.type';
 
 
 import { ProdutoService } from '../../../produto/produto.service';
-import { SaidaService } from '../saida.service';
+import { OrcamentoService } from './../orcamento.service';
 
 
 
 @Component({
-  selector: 'app-saida-form',
+  selector: 'app-orcamento-form',
   imports: [ReactiveFormsModule,FloatLabelModule,FormsModule,MatSelectModule,CommonModule],
-  templateUrl: './saida-form.component.html',
-  styleUrl: './saida-form.component.scss'
+  templateUrl: './orcamento-form.component.html',
+  styleUrl: './orcamento-form.component.scss'
 })
-export class SaidaFormComponent implements OnInit{
+export class OrcamentoFormComponent implements OnInit{
   form!: FormGroup;
-  text = "Registar Saida"
+  text = "Registar Orcamento"
   cancel = "Cancelar"
 
   @Output() eventCancel = new EventEmitter()
@@ -42,10 +43,10 @@ export class SaidaFormComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private dialogRef: MatDialogRef<SaidaFormComponent>,
+    private dialogRef: MatDialogRef<OrcamentoFormComponent>,
     private clienteService: ClienteService,
     private produtoService: ProdutoService,
-    private saidaService: SaidaService,
+    private orcamentoService: OrcamentoService,
     private toastrService: ToastrService,
     @Inject(MAT_DIALOG_DATA) public produtoSelecionado: Produto
   ) {}
@@ -125,12 +126,11 @@ export class SaidaFormComponent implements OnInit{
 
           this.produtoService.editarProduto(this.produto.id, formData).subscribe(() => {
 
-            this.toastrService.success('Saida registrada com sucesso!', 'Sucesso');
+            this.toastrService.success('Orcamento registrado com sucesso!', 'Sucesso');
 
-            this.saidaService.registrarSaida(saida).subscribe(() => {
+            this.orcamentoService.registrarSaida(saida).subscribe(() => {
 
               this.dialogRef.close();
-              //window.location.reload();
               this.router.navigate(['home/orcamento']);
             });
           });
