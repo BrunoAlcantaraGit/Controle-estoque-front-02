@@ -6,7 +6,8 @@ body{
 
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
+  
   padding: 20px;
 
   button {
