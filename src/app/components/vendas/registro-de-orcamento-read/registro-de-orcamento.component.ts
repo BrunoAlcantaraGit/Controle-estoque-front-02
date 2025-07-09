@@ -12,7 +12,7 @@ import { ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
-import { Saida } from '../orcamento/orcamento.type';
+import { Orcamento } from '../orcamento/orcamento.type';
 import { OrcamentoService } from '../orcamento/orcamento.service';
 import { ProdutoService } from '../../produto/produto.service';
 import { Produto } from '../../produto/produto.type';
@@ -30,8 +30,8 @@ import { Produto } from '../../produto/produto.type';
 })
 export class RegistroDeSaidasReadComponent implements OnInit {
 
-  saidas: Saida[] = []
-  selectedProducts!: Saida[];
+  orcamento: Orcamento[] = []
+  selectedProducts!: Orcamento[];
   colunas: string[] = ['selecionado', 'quantidade', 'produto', 'cliente', 'totalDaVenda', 'acoes'];
   selecionado?: boolean;
   produto?: Produto
@@ -48,7 +48,7 @@ export class RegistroDeSaidasReadComponent implements OnInit {
   ){}
   ngOnInit() {
     this.orcamentoService.listar().subscribe((data) => {
-       this.saidas = data;
+       this.orcamento = data;
        this.dataSource.data = data;
     });
 
@@ -67,22 +67,22 @@ gerarOrcamento(){
 }
 
  todosSelecionados(): boolean {
-    return this.saidas.every(s => s.selecionado);
+    return this.orcamento.every(o => o.selecionado);
   }
 
   indeterminado(): boolean {
-    return this.saidas.some(s => s.selecionado) && !this.todosSelecionados();
+    return this.orcamento.some(o => o.selecionado) && !this.todosSelecionados();
   }
 
   selecionarTodos(valor: boolean): void {
-    this.saidas.forEach(s => s.selecionado = valor);
+    this.orcamento.forEach(o => o.selecionado = valor);
   }
   verSelecionados(): void {
-    const selecionados = this.saidas.filter(s => s.selecionado);
-    alert(`Selecionados: ${selecionados.map(s => s.produtos).join(', ') || 'Nenhum'}`);
+    const selecionados = this.orcamento.filter(o => o.selecionado);
+    alert(`Selecionados: ${selecionados.map(o => o.produtos).join(', ') || 'Nenhum'}`);
   }
 
-  excluirRegistroSaida(id:number){}
+  excluirRegistroOrcamento(id:number){}
 
 
   venda(){}

@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
- import{MatIconModule } from '@angular/material/icon';
- import { RouterLink } from '@angular/router';
- import{MatDialogModule } from '@angular/material/dialog';
- import{MatDialog } from '@angular/material/dialog';
+import{MatIconModule } from '@angular/material/icon';
+import{MatDialogModule } from '@angular/material/dialog';
+import{MatDialog } from '@angular/material/dialog';
 import{ActivatedRoute} from '@angular/router';
 
 
 import { Produto} from '../../../produto/produto.type';
 import { ProdutoService } from '../../../produto/produto.service';
-import { VendasFormComponent } from '../../vendas-form/vendas-form.component';
 import { OrcamentoFormComponent } from '../orcamento-form/orcamento-form.component';
 
 @Component({
@@ -24,16 +22,11 @@ export class OrcamentoReadComponent implements OnInit {
   constructor(
     private produtoService: ProdutoService,
     private dialog: MatDialog,
-    private activateRoute: ActivatedRoute
   ){}
-
-
 
   formDate!:FormData
   produtos!: Produto[]
 
-
-registrarSaida(){}
 
     ngOnInit(): void {
       this.produtoService.listarProdutos().subscribe((dados) => {
@@ -41,11 +34,6 @@ registrarSaida(){}
 
       });
     }
-
-
-
-
-
 
 
     openOrcamento(id:number){

@@ -28,8 +28,9 @@ export class ProdutoCreateComponent {
     console.log(formData)
     this.produtoService.salvar(formData).subscribe({
       next: () => {
-        this.router.navigate(['home/produtos'])
         this.toastrService.success('Produto cadastrado com sucesso!', 'Sucesso')
+        this.router.navigate(['home/produtos'])
+        
       },
       error: () => {
         this.toastrService.error('Produto não registrado, verifique o preenchimento, e tente novamente', 'Erro')

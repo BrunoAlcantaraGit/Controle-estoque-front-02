@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Saida } from './orcamento.type';
+import { Orcamento } from './orcamento.type';
 import { environment } from '../../../environment';
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ baseUrl = environment.url
     private http: HttpClient,
   ){}
 
-registrarSaida(saida: Saida): Observable<Saida>{
+salvar(orcamento: Orcamento): Observable<Orcamento>{
 
   const token = sessionStorage.getItem('auth-token');
   const headers = new HttpHeaders({
@@ -22,19 +22,19 @@ registrarSaida(saida: Saida): Observable<Saida>{
     'Content-Type': 'application/json'
   });
 
-  return this.http.post<Saida>(`${this.baseUrl}/saidas/salvar`, saida,{headers});
+  return this.http.post<Orcamento>(`${this.baseUrl}/orcamento/salvar`, orcamento,{headers});
 
 }
 
 
-listar():Observable<Saida[]>{
+listar():Observable<Orcamento[]>{
 
   const token = sessionStorage.getItem('auth-token');
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
   });
-  return this.http.get<Saida[]>(`${this.baseUrl}/saidas/listar`,{headers});
+  return this.http.get<Orcamento[]>(`${this.baseUrl}/orcamento/listar`,{headers});
 }
 
 }

@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Cliente } from '../../../Clientes/cliente-taype';
 import { ClienteService } from '../../../Clientes/cliente.service';
-import { Saida } from '../orcamento.type';
+import { Orcamento } from '../orcamento.type';
 
 
 import { ProdutoService } from '../../../produto/produto.service';
@@ -37,7 +37,7 @@ export class OrcamentoFormComponent implements OnInit{
   @Output() eventCancel = new EventEmitter()
   @Input() clientes?: Cliente[];
   produto?: Produto
-  @Input() saida?: Saida;
+  @Input() orcamento?: Orcamento;
 
 
   constructor(
@@ -93,26 +93,26 @@ export class OrcamentoFormComponent implements OnInit{
 
   criarFormulario(): void {
     this.form = this.formBuilder.group({
-      quantidade: [this.saida?.quantidade || '',Validators.required],
-      venda: [this.saida?.venda || '', Validators.required],
-      compra: [this.saida?.compra || '', Validators.required],
-      totalDaVenda: [this.saida?.totalDaVenda || '',  Validators.required],
-      lucroTransacao: [ this.saida?.lucroTransacao || '' ,Validators.required],
-      cliente: [this.saida?.cliente || '', Validators.required],
-      produto: [this.saida?.produtos || '', Validators.required]
+      quantidade: [this.orcamento?.quantidade || '',Validators.required],
+      venda: [this.orcamento?.venda || '', Validators.required],
+      compra: [this.orcamento?.compra || '', Validators.required],
+      totalDaVenda: [this.orcamento?.totalDaVenda || '',  Validators.required],
+      lucroTransacao: [ this.orcamento?.lucroTransacao || '' ,Validators.required],
+      cliente: [this.orcamento?.cliente || '', Validators.required],
+      produto: [this.orcamento?.produtos || '', Validators.required]
     });
   }
 
 
 
-    registrarSaida(saida: Saida) {
-      console.log(saida);
+    registrarOcamento(orcamento: Orcamento) {
+      console.log(orcamento);
       if (!this.produto?.id) return;
 
         const quantidadeAtual = this.produto.quantidade;
 
-        if (quantidadeAtual >= saida.quantidade && saida.quantidade > 0) {
-          const novaQuantidade = quantidadeAtual - saida.quantidade;
+        if (quantidadeAtual >= orcamento.quantidade && orcamento.quantidade > 0) {
+          const novaQuantidade = quantidadeAtual - orcamento.quantidade;
           const produtoAtualizado = { ...this.produto, quantidade: novaQuantidade };
           const formData = new FormData();
           formData.append('quantidade', produtoAtualizado.quantidade.toString());
@@ -128,7 +128,7 @@ export class OrcamentoFormComponent implements OnInit{
 
             this.toastrService.success('Orcamento registrado com sucesso!', 'Sucesso');
 
-            this.orcamentoService.registrarSaida(saida).subscribe(() => {
+            this.orcamentoService.salvar(orcamento).subscribe(() => {
 
               this.dialogRef.close();
               this.router.navigate(['home/orcamento']);
