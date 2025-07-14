@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -16,6 +16,7 @@ import { Orcamento } from '../orcamento/orcamento.type';
 import { OrcamentoService } from '../orcamento/orcamento.service';
 import { ProdutoService } from '../../produto/produto.service';
 import { Produto } from '../../produto/produto.type';
+import { Venda } from '../venta.type';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class RegistroDeSaidasReadComponent implements OnInit {
   colunas: string[] = ['selecionado', 'quantidade', 'produto', 'cliente', 'totalDaVenda', 'acoes'];
   selecionado?: boolean;
   produto?: Produto
+  @Output() envio = new EventEmitter<Venda[]>();
 
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -85,6 +87,24 @@ gerarOrcamento(){
   excluirRegistroOrcamento(id:number){}
 
 
-  venda(){}
+  venda(){  
+    const selcionados = this.orcamento.filter(o => o.selecionado);
+    if (selcionados.length === 0) {
+      this.toastrService.error('Nenhum registro selecionado', 'Erro');
+      return;
+    }
+
+    const paylodVenda = selcionados.map(o => ({
+      //quantidade: o.quantidade,
+      produtoIds: o.produtos,
+      cliente: o.cliente.id,
+      orcamentoIds: o.id,
+      lucro: o.lucroTransacao,
+      valorTotalDaVenda: o.totalDaVenda
+    }));
+
+
+    console.log(paylodVenda);
+}
 
 }

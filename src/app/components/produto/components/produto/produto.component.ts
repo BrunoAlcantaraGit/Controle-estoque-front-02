@@ -7,7 +7,7 @@ import { ProdutoReadComponent } from "../produto-read/produto-read.component";
 
 @Component({
   selector: 'app-produto',
-  imports: [ProdutoFormComponent, ClienteReadComponent, PainelReadComponent, ProdutoReadComponent],
+  imports: [ ProdutoReadComponent],
   templateUrl: './produto.component.html',
   styleUrl: './produto.component.scss'
 })

@@ -23,8 +23,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Produto } from '../../produto/produto.type';
 import { OrcamentoReadComponent } from './../orcamento/orcamento-read/orcamento-read.component';
 import { OrcamentoFormComponent } from './../orcamento/orcamento-form/orcamento-form.component';
-import { RegistroDeSaidasReadComponent } from "../registro-de-orcamento-read/registro-de-orcamento.component";
-import { ProdutoReadComponent } from "../../produto/components/produto-read/produto-read.component";
 import { ProdutoService } from '../../produto/produto.service';
 
 @Component({
@@ -40,12 +38,11 @@ import { ProdutoService } from '../../produto/produto.service';
     AutoCompleteModule,
     MatSelectModule,
     OrcamentoReadComponent,
-    RegistroDeSaidasReadComponent,
     MatTableModule,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
-    ProdutoReadComponent
+    
 ],
   templateUrl: './vendas-form.component.html',
   styleUrls: ['./vendas-form.component.scss']

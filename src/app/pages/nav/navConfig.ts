@@ -24,7 +24,7 @@ export const navConfig: naveDate[] = [
 
 { title: 'Vendas',
    icon: 'pi-window-maximize',
-  routeURL: 'vendas'
+  routeURL: 'venda-read'
  },
 
 
