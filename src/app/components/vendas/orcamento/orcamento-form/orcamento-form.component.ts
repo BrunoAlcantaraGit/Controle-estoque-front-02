@@ -106,7 +106,7 @@ export class OrcamentoFormComponent implements OnInit{
 
 
     registrarOcamento(orcamento: Orcamento) {
-      console.log(orcamento);
+      
       if (!this.produto?.id) return;
 
         const quantidadeAtual = this.produto.quantidade;

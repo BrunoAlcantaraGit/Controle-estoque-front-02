@@ -17,14 +17,14 @@ import { ProdutoCreateComponent } from './components/produto/components/produto-
 import { ProdutoUpdateComponent } from './components/produto/components/produto-update/produto-update.component';
 
 import { VendaReadComponent } from './components/vendas/venda-read/venda-read.component';
-import { VendasCreateComponent } from './components/vendas/vendas-create/vendas-create.component';
 import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
-import { VendasFormComponent } from './components/vendas/vendas-form/vendas-form.component';
-import { RegistroDeSaidasReadComponent } from './components/vendas/registro-de-orcamento-read/registro-de-orcamento.component';
+
+import { RegistroDeSaidasReadComponent } from './components/vendas/orcamento/registro-de-orcamento-read/registro-de-orcamento.component';
+import{ OrcamentoReadComponent } from './components/vendas/orcamento/orcamento-read/orcamento-read.component';
 
 import { PainelComponent} from './components/painel-saidas/components/painel/painel.component';
 import{ PainelReadComponent } from './components/painel-saidas/components/painel-read/painel-read.component';
-
+//notepad .\src\app\app.routes.ts//
 export const routes: Routes = [
 
   {path:'', redirectTo:'/login', pathMatch:'full'},
@@ -51,17 +51,17 @@ export const routes: Routes = [
     {path:"produtos-update/:id",component:ProdutoUpdateComponent},
 
     {path:"venda-read",component:VendaReadComponent},
-    {path:"vendas-create",component:VendasCreateComponent},
     {path:"vendas-update/:id",component:VendasUpdateComponent},
-    {path:"vendas-form",component:VendasFormComponent},
+    
 
     {path:"orcamento",component:RegistroDeSaidasReadComponent},
+    {path:"orcamento-read",component:OrcamentoReadComponent},
 
 
     {path:"painel",component:PainelComponent},
     {path:"painel-read/:id",component:PainelReadComponent},
 
-    {path:"", redirectTo:'saidas', pathMatch:'full'},
+   {path:"", redirectTo:'painel', pathMatch:'full'}
 
   ]
   },

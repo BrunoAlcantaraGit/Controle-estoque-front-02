@@ -6,6 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import{environment} from '../../environment'
 import { Venda } from './venta.type';
+
 @Injectable({
   providedIn: 'root'
 })

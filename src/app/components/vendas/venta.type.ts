@@ -1,7 +1,7 @@
 export interface Venda {
     id:number
     clienteId: number;
-    pordutoIds: number[];
+    produtoIds: number[];
     orcamentoIds: number[];
     lucro: number;
     valorTotalDaVenda: number;

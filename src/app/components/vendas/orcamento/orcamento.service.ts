@@ -37,4 +37,14 @@ listar():Observable<Orcamento[]>{
   return this.http.get<Orcamento[]>(`${this.baseUrl}/orcamento/listar`,{headers});
 }
 
+
+deletar(id: number): Observable<void> {
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  return this.http.delete<void>(`${this.baseUrl}/orcamento/deletar/${id}`, { headers });
+}
+
 }
