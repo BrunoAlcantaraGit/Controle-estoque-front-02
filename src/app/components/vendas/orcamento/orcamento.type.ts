@@ -11,6 +11,8 @@ totalDaVenda:number,
 lucroTransacao:number,
 data:Data,
 produtos:Produto[]
+produtoID: number;
 cliente:Cliente
+clienteID: number;
 selecionado?: boolean;
 }
