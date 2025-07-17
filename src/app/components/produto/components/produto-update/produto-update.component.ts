@@ -47,13 +47,13 @@ export class ProdutoUpdateComponent implements OnInit {
     })
 
     this.router.navigate(['home/produtos'])
-     window.location.reload();
+    window.location.reload();
   }
 
 
-  cancelar(){
-  this.dialogRef.close();
-  this.router.navigate(['home/produtos']);
+  cancelar() {
+    this.dialogRef.close();
+    this.router.navigate(['home/produtos']);
   }
 
 }

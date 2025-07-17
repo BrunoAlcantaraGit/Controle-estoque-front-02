@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 
 import { ClienteFormComponent } from "../cliente-form/cliente-form.component";
-import{ClienteService} from '../../cliente.service';
+import { ClienteService } from '../../cliente.service';
 import { Cliente } from './../../cliente-taype';
 
 @Component({
@@ -16,35 +16,35 @@ import { Cliente } from './../../cliente-taype';
 })
 export class ClienteUpdateComponent implements OnInit {
 
-cliente!:Cliente
+  cliente!: Cliente
 
-constructor(
-  @Inject(MAT_DIALOG_DATA) public data: any,
-  private router: Router,
-  private clienteService: ClienteService,
-  private toastrService: ToastrService,
-  private dialogRef: MatDialogRef<ClienteUpdateComponent>,
-){}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router,
+    private clienteService: ClienteService,
+    private toastrService: ToastrService,
+    private dialogRef: MatDialogRef<ClienteUpdateComponent>,
+  ) { }
 
-ngOnInit(): void {
-  if (this.data) {
-    this.cliente = this.data;
-}
-}
+  ngOnInit(): void {
+    if (this.data) {
+      this.cliente = this.data;
+    }
+  }
 
-atualizarCliente(Cliente: Cliente){
-  this.clienteService.editarCliente(this.cliente.id, Cliente).subscribe(cliente => {
+  atualizarCliente(Cliente: Cliente) {
+    this.clienteService.editarCliente(this.cliente.id, Cliente).subscribe(cliente => {
 
-  })
-  this.toastrService.success('Fornecedor atualizado com sucesso!');
-  this.dialogRef.close();
-  window.location.reload();
+    })
+    this.toastrService.success('Fornecedor atualizado com sucesso!');
+    this.dialogRef.close();
+    window.location.reload();
 
-}
+  }
 
-fechar(){
-  this.dialogRef.close();
-  this.router.navigate(['home/clientes']);
-}
+  fechar() {
+    this.dialogRef.close();
+    this.router.navigate(['home/clientes']);
+  }
 
 }

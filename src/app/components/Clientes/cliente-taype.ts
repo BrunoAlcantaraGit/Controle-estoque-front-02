@@ -6,13 +6,13 @@ export interface Cliente {
   endereco: Endereco;
 }
 
-export interface Contato{
+export interface Contato {
   id: number;
   telefone: string;
   email: string;
-  }
+}
 
-  export interface Endereco{
+export interface Endereco {
   id: number;
   logradouro: string;
   numero: string;
@@ -21,5 +21,5 @@ export interface Contato{
   estado: string;
   complemento: string;
 
-  }
+}
 

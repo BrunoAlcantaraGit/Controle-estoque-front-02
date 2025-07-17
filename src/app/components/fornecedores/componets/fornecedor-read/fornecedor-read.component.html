@@ -1,11 +1,5 @@
-
-<p-table
-    [value]="fornecedor"
-    [paginator]="true"
-    [rows]="5"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    [rowsPerPageOptions]="[5,10]"
->
+<p-table [value]="fornecedor" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+    [rowsPerPageOptions]="[5,10]">
     <ng-template pTemplate="header">
         <tr>
             <th style="width:25%">Name</th>
@@ -22,18 +16,16 @@
             <td>{{ fornecedor.documento }}</td>
             <td>{{ fornecedor.telefone }}</td>
             <td>{{ fornecedor.email }}</td>
-              <td class="button-wrapper">
+            <td class="button-wrapper">
 
-              <button mat-icon-button style="color: red;"
-              (click)="excluirFornecedor(fornecedor.id); $event.stopPropagation()"
-              >
-                <i class="material-icons red">delete</i>
-            </button>
-              <button mat-icon-button style="color: rgb(0, 4, 255);"
-              (click)="editarFornecedor(fornecedor.id); $event.stopPropagation()"
-              >
-                <i class="material-icons red">edit</i>
-            </button>
+                <button mat-icon-button style="color: red;"
+                    (click)="excluirFornecedor(fornecedor.id); $event.stopPropagation()">
+                    <i class="material-icons red">delete</i>
+                </button>
+                <button mat-icon-button style="color: rgb(0, 4, 255);"
+                    (click)="editarFornecedor(fornecedor.id); $event.stopPropagation()">
+                    <i class="material-icons red">edit</i>
+                </button>
 
             </td>
         </tr>

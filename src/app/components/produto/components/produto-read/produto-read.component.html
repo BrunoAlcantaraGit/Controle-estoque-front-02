@@ -1,11 +1,5 @@
-
-<p-table
-    [value]="produtos"
-    [paginator]="true"
-    [rows]="5"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    [rowsPerPageOptions]="[5,10]"
->
+<p-table [value]="produtos" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+    [rowsPerPageOptions]="[5,10]">
     <ng-template pTemplate="header">
         <tr>
             <th style="width:20%">Foto</th>
@@ -18,7 +12,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-produtos>
-        <tr >
+        <tr>
 
             <td><img [src]="'data:image/png;base64,' + produtos.imagem" alt="imagem" width="50" height="50" /></td>
             <td>{{ produtos.descricao }}</td>
@@ -28,14 +22,14 @@
 
 
             <td class="button-wrapper">
-              <button mat-icon-button style="color: red;"
-              (click)="excluirProduto(produtos.id); $event.stopPropagation()">
-                <i class="material-icons red">delete</i>
-            </button>
-               <button mat-icon-button style="color: blue;"
-              (click)="editarProduto(produtos.id); $event.stopPropagation()">
-                <i class="material-icons red">edit</i>
-            </button>
+                <button mat-icon-button style="color: red;"
+                    (click)="excluirProduto(produtos.id); $event.stopPropagation()">
+                    <i class="material-icons red">delete</i>
+                </button>
+                <button mat-icon-button style="color: blue;"
+                    (click)="editarProduto(produtos.id); $event.stopPropagation()">
+                    <i class="material-icons red">edit</i>
+                </button>
             </td>
 
 

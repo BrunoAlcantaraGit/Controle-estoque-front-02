@@ -2,68 +2,67 @@
 
 
   <div class="input-wrepper">
-   <p-floatlabel variant="in">
-     <input matInput formControlName="nome" id="nome" >
-     <label for="nome">Nome</label>
-   </p-floatlabel>
+    <p-floatlabel variant="in">
+      <input matInput formControlName="nome" id="nome">
+      <label for="nome">Nome</label>
+    </p-floatlabel>
 
 
-   <p-floatlabel>
-    <input matInput  formControlName="documento" id="documento" >
-     <label for="documento">Documento</label>
-   </p-floatlabel>
+    <p-floatlabel>
+      <input matInput formControlName="documento" id="documento">
+      <label for="documento">Documento</label>
+    </p-floatlabel>
 
-   <ng-container formGroupName="contato">
-     <p-floatlabel>
-       <input matInput formControlName="telefone" formGroupName="telefone">
-       <label for="telefone">Telefone</label>
-     </p-floatlabel>
+    <ng-container formGroupName="contato">
+      <p-floatlabel>
+        <input matInput formControlName="telefone" formGroupName="telefone">
+        <label for="telefone">Telefone</label>
+      </p-floatlabel>
 
-     <p-floatlabel >
-       <input matInput formControlName="email" id="email">
-       <label for="email">E-mail</label>
-     </p-floatlabel>
-   </ng-container>
+      <p-floatlabel>
+        <input matInput formControlName="email" id="email">
+        <label for="email">E-mail</label>
+      </p-floatlabel>
+    </ng-container>
 
-   <ng-container formGroupName="endereco">
-     <p-floatlabel>
-       <input matInput  formControlName="cep" id="cep">
-       <label for="cep">CEP</label>
-     </p-floatlabel>
+    <ng-container formGroupName="endereco">
+      <p-floatlabel>
+        <input matInput formControlName="cep" id="cep">
+        <label for="cep">CEP</label>
+      </p-floatlabel>
 
-     <p-floatlabel >
-       <input matInput  formControlName="logradouro" id="logradouro" >
-       <label for="logradouro">Logradouro</label>
-     </p-floatlabel>
-
-
-     <p-floatlabel>
-       <input matInput  formControlName="numero" id="numero">
-       <label for="numero">Número</label>
-     </p-floatlabel>
-
-     <p-floatlabel>
-       <input matInput  formControlName="bairro" id="bairro">
-       <label for="bairro">Bairro</label>
-     </p-floatlabel>
+      <p-floatlabel>
+        <input matInput formControlName="logradouro" id="logradouro">
+        <label for="logradouro">Logradouro</label>
+      </p-floatlabel>
 
 
-     <p-floatlabel>
-       <input matInput  formControlName="estado" id="estado" >
-       <label for="estado">Estado</label>
-     </p-floatlabel>
+      <p-floatlabel>
+        <input matInput formControlName="numero" id="numero">
+        <label for="numero">Número</label>
+      </p-floatlabel>
+
+      <p-floatlabel>
+        <input matInput formControlName="bairro" id="bairro">
+        <label for="bairro">Bairro</label>
+      </p-floatlabel>
 
 
-     <p-floatlabel >
-       <input matInput  formControlName="complemento" id="complemento">
-       <label for="complemento" style="width: 500px;">Complemento</label>
-     </p-floatlabel>
-   </ng-container>
-</div>
+      <p-floatlabel>
+        <input matInput formControlName="estado" id="estado">
+        <label for="estado">Estado</label>
+      </p-floatlabel>
 
-<div class="btn-wrapper">
- <button type="submit" (click)="enviar()">{{text}}</button>
- <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
-</div>
+
+      <p-floatlabel>
+        <input matInput formControlName="complemento" id="complemento">
+        <label for="complemento" style="width: 500px;">Complemento</label>
+      </p-floatlabel>
+    </ng-container>
+  </div>
+
+  <div class="btn-wrapper">
+    <button type="submit" (click)="enviar()">{{text}}</button>
+    <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
+  </div>
 </form>
-

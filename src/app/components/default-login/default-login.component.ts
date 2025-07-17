@@ -1,4 +1,4 @@
-import { RouterOutlet,Router} from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,21 +8,21 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './default-login.component.scss'
 })
 export class DefaultLoginComponent {
-@Input() title = '';
-@Input() primaryButtonText = '';
-@Input() secondaryButtonText = '';
-@Input() disablePrimaryButton: boolean = true;
-@Output("submit") envio = new EventEmitter();
-@Output("navegate") OnNavegate = new EventEmitter();
+  @Input() title = '';
+  @Input() primaryButtonText = '';
+  @Input() secondaryButtonText = '';
+  @Input() disablePrimaryButton: boolean = true;
+  @Output("submit") envio = new EventEmitter();
+  @Output("navegate") OnNavegate = new EventEmitter();
 
-constructor(private router:Router){}
+  constructor(private router: Router) { }
 
-submit(){
-  this.envio.emit();
-}
+  submit() {
+    this.envio.emit();
+  }
 
-navegate(){
-this.OnNavegate.emit();
-}
+  navegate() {
+    this.OnNavegate.emit();
+  }
 
 }

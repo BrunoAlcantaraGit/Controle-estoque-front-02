@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
 
-import{environment} from '../../environment'
+import { environment } from '../../environment'
 import { Venda } from './venta.type';
 
 @Injectable({
@@ -13,8 +13,8 @@ import { Venda } from './venta.type';
 export class VendasService {
 
   constructor(
-    private http: HttpClient,){
-    }
+    private http: HttpClient,) {
+  }
   private baseUrl = environment.url
   private url = `${this.baseUrl}/venda/`
 
@@ -26,6 +26,6 @@ export class VendasService {
       'Content-Type': 'application/json'
     });
     return this.http.post<any>(`${this.url}salvar`, venda, { headers });
-  } 
+  }
 
 }

@@ -16,29 +16,28 @@ import { Router } from '@angular/router';
 })
 export class FornecedorCreateComponent {
 
-constructor(
-  private fornecedorService: FornecedorServiceService,
-  private toastService: ToastrService,
-  private router: Router
-)
-{}
+  constructor(
+    private fornecedorService: FornecedorServiceService,
+    private toastService: ToastrService,
+    private router: Router
+  ) { }
 
- title = 'Cadastro de Fornecedor';
+  title = 'Cadastro de Fornecedor';
 
-  cadastrarFornecedor(fornecedor: Fornecedor){
+  cadastrarFornecedor(fornecedor: Fornecedor) {
 
     this.fornecedorService.cadastrarFornecedor(fornecedor).subscribe({
       next: () => {
         this.toastService.success('Fornecedor cadastrado com sucesso!', 'Sucesso');
         this.router.navigate(['home/fornecedores']);
       },
-      error:(error) => this.toastService.error("Usuário ja está cadastrado"),
+      error: (error) => this.toastService.error("Usuário ja está cadastrado"),
     })
 
   }
 
   fechar() {
     this.router.navigate(['home/fornecedores']);
-  } 
+  }
 
 }

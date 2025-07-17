@@ -1,45 +1,45 @@
 <form [formGroup]="form">
 
   <div class="input-wrepper">
-   <p-floatlabel variant="in">
-     <input matInput formControlName="quantidade" id="quantidade" type="number" [value]="produto?.quantidade" required>
-     <label for="quantidade">Quantidade de produto</label>
-   </p-floatlabel>
+    <p-floatlabel variant="in">
+      <input matInput formControlName="quantidade" id="quantidade" type="number" [value]="produto?.quantidade" required>
+      <label for="quantidade">Quantidade de produto</label>
+    </p-floatlabel>
 
 
-   <p-floatlabel>
-    <input matInput  formControlName="compra" id="compra" readonly >
-     <label for="compra">compra(Uni)</label>
-   </p-floatlabel>
+    <p-floatlabel>
+      <input matInput formControlName="compra" id="compra" readonly>
+      <label for="compra">compra(Uni)</label>
+    </p-floatlabel>
 
-   <p-floatlabel>
-    <input matInput  formControlName="venda" id="venda" readonly >
-     <label for="venda">venda (Uni)</label>
-   </p-floatlabel>
+    <p-floatlabel>
+      <input matInput formControlName="venda" id="venda" readonly>
+      <label for="venda">venda (Uni)</label>
+    </p-floatlabel>
 
-   <p-floatlabel>
-    <input matInput formControlName="totalDaVenda" id="totalDaVenda" readonly>
-    <label for="totalDaVenda">Total de vendido</label>
-  </p-floatlabel>
+    <p-floatlabel>
+      <input matInput formControlName="totalDaVenda" id="totalDaVenda" readonly>
+      <label for="totalDaVenda">Total de vendido</label>
+    </p-floatlabel>
 
-  <p-floatlabel>
-    <input matInput formControlName="lucroTransacao" id="lucroTransacao" readonly>
-    <label for="lucroTransacao">Lucro da Transação</label>
-  </p-floatlabel>
+    <p-floatlabel>
+      <input matInput formControlName="lucroTransacao" id="lucroTransacao" readonly>
+      <label for="lucroTransacao">Lucro da Transação</label>
+    </p-floatlabel>
 
-  <mat-form-field>
-    <mat-label>Cliente</mat-label>
-    <mat-select formControlName="cliente">
-      <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
-        {{cliente.nome}} {{cliente.documento}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cliente</mat-label>
+      <mat-select formControlName="cliente">
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{cliente.nome}} {{cliente.documento}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-</div>
+  </div>
 
-<div class="btn-wrapper">
- <button type="submit" (click)="registrarOcamento(form.value)">{{text}}</button>
- <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
-</div>
+  <div class="btn-wrapper">
+    <button type="submit" (click)="registrarOcamento(form.value)">{{text}}</button>
+    <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
+  </div>
 </form>

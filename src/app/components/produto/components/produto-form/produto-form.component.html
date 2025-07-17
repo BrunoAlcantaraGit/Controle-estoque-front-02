@@ -1,64 +1,54 @@
-
 <form [formGroup]="form">
 
 
   <div class="input-wrepper">
 
- <p-floatlabel>
-       <input matInput formControlName="quantidade" formGroupName="quantidade" type="number" minlength="1">
-       <label for="quantidade">Quantidade</label>
-     </p-floatlabel>
-   
+    <p-floatlabel>
+      <input matInput formControlName="quantidade" formGroupName="quantidade" type="number" minlength="1">
+      <label for="quantidade">Quantidade</label>
+    </p-floatlabel>
 
-   <p-floatlabel>
-    <input matInput  formControlName="descricao" id="descricao" >
-    <label for="descricao">Descricão</label>
-   </p-floatlabel>
 
-     <p-floatlabel >
+    <p-floatlabel>
+      <input matInput formControlName="descricao" id="descricao">
+      <label for="descricao">Descricão</label>
+    </p-floatlabel>
+
+    <p-floatlabel>
       <input matInput formControlName="compra" id="compra">
       <label for="compra">valor da compra (uni)</label>
     </p-floatlabel>
 
-     <p-floatlabel>
-      <input matInput  formControlName="venda" id="venda">
+    <p-floatlabel>
+      <input matInput formControlName="venda" id="venda">
       <label for="venda">valor da venda (Uni)</label>
     </p-floatlabel>
 
 
-     <p-floatlabel >
-       <input matInput  formControlName="marca" id="marca" >
-       <label for="marca">Marca</label>
-     </p-floatlabel>
+    <p-floatlabel>
+      <input matInput formControlName="marca" id="marca">
+      <label for="marca">Marca</label>
+    </p-floatlabel>
 
 
-     <p-floatlabel>
-       <input matInput  formControlName="codigo" id="codigo">
-       <label for="codigo">Código</label>
-     </p-floatlabel>
+    <p-floatlabel>
+      <input matInput formControlName="codigo" id="codigo">
+      <label for="codigo">Código</label>
+    </p-floatlabel>
 
 
 
-     <p-fileUpload class="img"
-     name="imagem"
-     mode="basic"
-     customUpload="true"
-     [auto]="false"
-     [chooseLabel]=""
-     [showUploadButton]="false"
-     [showCancelButton]="false"
-     (onSelect)="onFileSelect($event)"
-   ></p-fileUpload>
+    <p-fileUpload class="img" name="imagem" mode="basic" customUpload="true" [auto]="false" [chooseLabel]=""
+      [showUploadButton]="false" [showCancelButton]="false" (onSelect)="onFileSelect($event)"></p-fileUpload>
 
-   <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Preview" class="mt-4" width="300" height="300">
+    <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Preview" class="mt-4" width="300" height="300">
 
 
-</div>
+  </div>
 
-<div class="btn-wrapper">
- <button type="submit" (click)="enviar()">{{text}}</button>
+  <div class="btn-wrapper">
+    <button type="submit" (click)="enviar()">{{text}}</button>
 
- <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
-</div>
+    <button type="submit" style="background-color: rgb(228, 61, 61);" (click)="cancelar()">{{cancel}}</button>
+  </div>
 </form>
-

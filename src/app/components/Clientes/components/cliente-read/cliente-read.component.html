@@ -1,9 +1,4 @@
-
-<p-table
-    [value]="cliente"
-    [paginator]="true"
-    [rows]="5"
-    [tableStyle]="{ 'min-width': '50rem' }"
+<p-table [value]="cliente" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
     [rowsPerPageOptions]="[5,10]">
     <ng-template pTemplate="header">
         <tr>
@@ -15,7 +10,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-fornecedor>
-        <tr >
+        <tr>
 
             <td>{{ fornecedor.nome}}</td>
             <td>{{ fornecedor.documento }}</td>
@@ -24,17 +19,14 @@
 
             <td class="button-wrapper">
 
-              <button mat-icon-button style="color: red;"
-              (click)="excluirFornecedor(fornecedor.id); $event.stopPropagation()"
-              >
-                <i class="material-icons red">delete</i>
-            </button>
+                <button mat-icon-button style="color: red;" (click)="deletar(fornecedor.id); $event.stopPropagation()">
+                    <i class="material-icons red">delete</i>
+                </button>
 
-             <button mat-icon-button style="color: blue;"
-              (click)="editarFornecedor(fornecedor.id); $event.stopPropagation()"
-              >
-                <i class="material-icons red">edit</i>
-            </button>
+                <button mat-icon-button style="color: blue;"
+                    (click)="editarFornecedor(fornecedor.id); $event.stopPropagation()">
+                    <i class="material-icons red">edit</i>
+                </button>
             </td>
         </tr>
     </ng-template>

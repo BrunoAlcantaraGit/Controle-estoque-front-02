@@ -7,17 +7,17 @@ import { ProdutoReadComponent } from "../produto-read/produto-read.component";
 
 @Component({
   selector: 'app-produto',
-  imports: [ ProdutoReadComponent],
+  imports: [ProdutoReadComponent],
   templateUrl: './produto.component.html',
   styleUrl: './produto.component.scss'
 })
 export class ProdutoComponent {
 
-constructor(
-  private router: Router
-){}
+  constructor(
+    private router: Router
+  ) { }
 
-  cadastrarProduto(){
+  cadastrarProduto() {
     this.router.navigate(['home/produtos-create'])
   }
 

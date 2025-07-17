@@ -12,7 +12,7 @@ import { Fornecedor } from '../../fornecedor.type';
 @Component({
   selector: 'app-fornecedor-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, FloatLabelModule, SplitterModule, ReactiveFormsModule,InputMaskModule],
+  imports: [CommonModule, FormsModule, FloatLabelModule, SplitterModule, ReactiveFormsModule, InputMaskModule],
   templateUrl: './fornecedor-form.component.html',
   styleUrl: './fornecedor-form.component.scss'
 })
@@ -32,7 +32,7 @@ export class FornecedorFormComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private fornecedorService: FornecedorServiceService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.criarFormulario();
@@ -62,11 +62,11 @@ export class FornecedorFormComponent implements OnInit {
 
   criarFormulario(): void {
     this.form = this.formBuilder.group({
-      nome: [this.fornecedor ? this.fornecedor?.nome :'' ,],
+      nome: [this.fornecedor ? this.fornecedor?.nome : '',],
       documento: [this.fornecedor ? this.fornecedor?.documento : '',],
 
       contato: this.formBuilder.group({
-        telefone: [this.fornecedor? this.fornecedor.contato?.telefone : ''],
+        telefone: [this.fornecedor ? this.fornecedor.contato?.telefone : ''],
         email: [this.fornecedor ? this.fornecedor.contato?.email : ''],
       }),
 
@@ -93,7 +93,7 @@ export class FornecedorFormComponent implements OnInit {
           this.form.get('endereco')?.patchValue(patch);
 
 
-            for (let campo of Object.keys(patch)) {
+          for (let campo of Object.keys(patch)) {
             const control = this.form.get(`endereco.${campo}`);
             control?.markAsDirty();
             control?.markAsTouched();
@@ -109,7 +109,7 @@ export class FornecedorFormComponent implements OnInit {
   }
 
   cancelar(): void {
-    this.cancelarEnvio.emit(); 
+    this.cancelarEnvio.emit();
   }
 
 }

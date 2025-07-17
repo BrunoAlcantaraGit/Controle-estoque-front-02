@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Produto } from '../../../produto/produto.type';
 
-import { Component, OnInit, Input, Output} from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule,Validators } from '@angular/forms';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import{MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -25,11 +25,11 @@ import { OrcamentoService } from './../orcamento.service';
 
 @Component({
   selector: 'app-orcamento-form',
-  imports: [ReactiveFormsModule,FloatLabelModule,FormsModule,MatSelectModule,CommonModule],
+  imports: [ReactiveFormsModule, FloatLabelModule, FormsModule, MatSelectModule, CommonModule],
   templateUrl: './orcamento-form.component.html',
   styleUrl: './orcamento-form.component.scss'
 })
-export class OrcamentoFormComponent implements OnInit{
+export class OrcamentoFormComponent implements OnInit {
   form!: FormGroup;
   text = "Registar Orcamento"
   cancel = "Cancelar"
@@ -49,7 +49,7 @@ export class OrcamentoFormComponent implements OnInit{
     private orcamentoService: OrcamentoService,
     private toastrService: ToastrService,
     @Inject(MAT_DIALOG_DATA) public produtoSelecionado: Produto
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.criarFormulario();
@@ -63,7 +63,7 @@ export class OrcamentoFormComponent implements OnInit{
 
       if (!isNaN(quantidade) && !isNaN(compra)) {
         const totalDaVenda = quantidade * compra;
-        this.form.get('totalDaVenda')?.setValue(totalDaVenda, {emitEvent: false });
+        this.form.get('totalDaVenda')?.setValue(totalDaVenda, { emitEvent: false });
       }
 
       if (!isNaN(quantidade) && !isNaN(venda) && !isNaN(venda)) {
@@ -74,9 +74,9 @@ export class OrcamentoFormComponent implements OnInit{
 
 
 
-     if (this.produtoSelecionado) {
+    if (this.produtoSelecionado) {
 
-       this.produto = this.produtoSelecionado;
+      this.produto = this.produtoSelecionado;
 
       this.form.patchValue({
         produto: this.produtoSelecionado.id,
@@ -93,11 +93,11 @@ export class OrcamentoFormComponent implements OnInit{
 
   criarFormulario(): void {
     this.form = this.formBuilder.group({
-      quantidade: [this.orcamento?.quantidade || '',Validators.required],
+      quantidade: [this.orcamento?.quantidade || '', Validators.required],
       venda: [this.orcamento?.venda || '', Validators.required],
       compra: [this.orcamento?.compra || '', Validators.required],
-      totalDaVenda: [this.orcamento?.totalDaVenda || '',  Validators.required],
-      lucroTransacao: [ this.orcamento?.lucroTransacao || '' ,Validators.required],
+      totalDaVenda: [this.orcamento?.totalDaVenda || '', Validators.required],
+      lucroTransacao: [this.orcamento?.lucroTransacao || '', Validators.required],
       cliente: [this.orcamento?.cliente || '', Validators.required],
       produto: [this.orcamento?.produtos || '', Validators.required]
     });
@@ -105,40 +105,40 @@ export class OrcamentoFormComponent implements OnInit{
 
 
 
-    registrarOcamento(orcamento: Orcamento) {
-      
-      if (!this.produto?.id) return;
+  registrarOcamento(orcamento: Orcamento) {
 
-        const quantidadeAtual = this.produto.quantidade;
+    if (!this.produto?.id) return;
 
-        if (quantidadeAtual >= orcamento.quantidade && orcamento.quantidade > 0) {
-          const novaQuantidade = quantidadeAtual - orcamento.quantidade;
-          const produtoAtualizado = { ...this.produto, quantidade: novaQuantidade };
-          const formData = new FormData();
-          formData.append('quantidade', produtoAtualizado.quantidade.toString());
-          formData.append('descricao', produtoAtualizado.descricao);
-          formData.append('marca', produtoAtualizado.marca);
-          formData.append('codigo', produtoAtualizado.codigo);
-          formData.append('venda', produtoAtualizado.venda.toString());
-          formData.append('compra', produtoAtualizado.compra.toString());
-          formData.append('imagem', produtoAtualizado.imagem);
+    const quantidadeAtual = this.produto.quantidade;
+
+    if (quantidadeAtual >= orcamento.quantidade && orcamento.quantidade > 0) {
+      const novaQuantidade = quantidadeAtual - orcamento.quantidade;
+      const produtoAtualizado = { ...this.produto, quantidade: novaQuantidade };
+      const formData = new FormData();
+      formData.append('quantidade', produtoAtualizado.quantidade.toString());
+      formData.append('descricao', produtoAtualizado.descricao);
+      formData.append('marca', produtoAtualizado.marca);
+      formData.append('codigo', produtoAtualizado.codigo);
+      formData.append('venda', produtoAtualizado.venda.toString());
+      formData.append('compra', produtoAtualizado.compra.toString());
+      formData.append('imagem', produtoAtualizado.imagem);
 
 
-          this.produtoService.editarProduto(this.produto.id, formData).subscribe(() => {
+      this.produtoService.editarProduto(this.produto.id, formData).subscribe(() => {
 
-            this.toastrService.success('Orcamento registrado com sucesso!', 'Sucesso');
+        this.toastrService.success('Orcamento registrado com sucesso!', 'Sucesso');
 
-            this.orcamentoService.salvar(orcamento).subscribe(() => {
+        this.orcamentoService.salvar(orcamento).subscribe(() => {
 
-              this.dialogRef.close();
-              this.router.navigate(['home/orcamento']);
-            });
-          });
+          this.dialogRef.close();
+          this.router.navigate(['home/orcamento']);
+        });
+      });
 
-        } else {
-          this.toastrService.error('Quantidade insuficiente em estoque', 'Erro');
-        }
-      }
+    } else {
+      this.toastrService.error('Quantidade insuficiente em estoque', 'Erro');
+    }
+  }
 
 
 
@@ -160,7 +160,7 @@ export class OrcamentoFormComponent implements OnInit{
 
   listarClientes(): void {
 
-     this.clienteService.listarClientes().subscribe((clientes) => {
+    this.clienteService.listarClientes().subscribe((clientes) => {
       this.clientes = clientes;
 
     });
@@ -168,10 +168,10 @@ export class OrcamentoFormComponent implements OnInit{
 
 
 
- cancelar(){
+  cancelar() {
 
-  this.dialogRef.close();
-  this.eventCancel.emit(this.router.navigate(['home/vendas-form']));
+    this.dialogRef.close();
+    this.eventCancel.emit(this.router.navigate(['home/vendas-form']));
 
   }
 }
