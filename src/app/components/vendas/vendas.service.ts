@@ -28,4 +28,23 @@ export class VendasService {
     return this.http.post<any>(`${this.url}salvar`, venda, { headers });
   }
 
+
+  listarVendas(): Observable<Venda[]> {
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<Venda[]>(`${this.url}listar`, { headers });
+  }
+
+  deletar(id: number): Observable<void> {
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.delete<void>(`${this.url}excluir/${id}`, { headers });
+  }
+
 }

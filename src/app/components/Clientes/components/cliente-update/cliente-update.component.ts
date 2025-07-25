@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
@@ -17,22 +17,26 @@ import { Cliente } from './../../cliente-taype';
 export class ClienteUpdateComponent implements OnInit {
 
   cliente!: Cliente
+  id!:number
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router,
+    private activateRoute: ActivatedRoute,
     private clienteService: ClienteService,
     private toastrService: ToastrService,
     private dialogRef: MatDialogRef<ClienteUpdateComponent>,
   ) { }
 
   ngOnInit(): void {
+    this.id = Number(this.activateRoute.snapshot.paramMap.get('id'))
     if (this.data) {
-      this.cliente = this.data;
+       this.cliente = this.data;
     }
   }
 
   atualizarCliente(Cliente: Cliente) {
+    console.log(Cliente);
     this.clienteService.editarCliente(this.cliente.id, Cliente).subscribe(cliente => {
 
     })

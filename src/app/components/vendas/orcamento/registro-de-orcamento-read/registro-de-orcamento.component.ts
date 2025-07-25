@@ -65,7 +65,7 @@ export class RegistroDeSaidasReadComponent implements OnInit {
       this.dataSource.data = data;
       console.log(this.orcamentos);
     });
-    
+
 
   }
 
@@ -81,12 +81,17 @@ export class RegistroDeSaidasReadComponent implements OnInit {
     this.orcamentoService.deletar(id).subscribe({
 
       next: () => {
-        this.toastrService.success('Registro de orçamento excluído com sucesso!', 'Sucesso');
+        this.toastrService.success('Registro de orçamento excluído com sucesso!', 'Sucesso',{
+          timeOut: 100000,
+          progressBar: true
+        });
         this.orcamentos = this.orcamentos.filter(o => o.id !== id);
         this.dataSource.data = this.orcamentos;
       },
       error: (error) => {
-        this.toastrService.error('Erro ao excluir registro de orçamento', 'Erro');
+        if (error.status == 404) {
+          this.toastrService.error('Não é possível excluir um orçamento vinculado a uma venda.', 'Erro');
+        }
         console.error(error);
       }
     });
@@ -94,57 +99,58 @@ export class RegistroDeSaidasReadComponent implements OnInit {
 
 
 
-vender() {
-  const selecionados = this.orcamentos.filter(o => o.selecionado);
+  vender() {
+    const selecionados = this.orcamentos.filter(o => o.selecionado);
 
-  if (selecionados.length === 0) {
-    this.toastrService.error('Nenhum registro selecionado', 'Erro');
-    return;
-  }
-
-  // Usa clienteID do primeiro
-  const clienteId = selecionados[0].clienteID;
-
-  // Verifica se todos são do mesmo cliente
-  const clientesDistintos = selecionados.some(o => o.clienteID !== clienteId);
-  if (clientesDistintos) {
-    this.toastrService.error('Todos os orçamentos devem ser do mesmo cliente', 'Erro');
-    return;
-  }
-
-  // IDs dos produtos (já estão direto no orçamento)
-  const produtoIdsSet: number[]=[];
-  selecionados.forEach(o => produtoIdsSet.push(o.produtoID));
-  const produtoIds = Array.from(produtoIdsSet);
-
-  // IDs dos orçamentos
-  const orcamentoIds = selecionados.map(o => o.id);
-
-  // Somatórios
-  const lucro = selecionados.reduce((acc, o) => acc + (o.lucroTransacao ?? 0), 0);
-  const valorTotalDaVenda = selecionados.reduce((acc, o) => acc + (o.totalDaVenda ?? 0), 0);
-
-  const venda: Venda = {
-    clienteId,
-    produtoIds,
-    orcamentoIds,
-    lucro,
-    valorTotalDaVenda
-  };
-
-  console.log(venda);
-
-  this.vendaService.salvar(venda).subscribe({
-    next: () => {
-      this.toastrService.success('Venda realizada com sucesso!', 'Sucesso');
-      // Atualizar lista e limpar seleção
-    },
-    error: (err) => {
-      this.toastrService.error('Erro ao realizar a venda', 'Erro');
-      console.error(err);
+    if (selecionados.length === 0) {
+      this.toastrService.error('Nenhum registro selecionado', 'Erro');
+      return;
     }
-  });
-}
+
+
+    const clienteId = selecionados[0].clienteID;
+
+
+    const clientesDistintos = selecionados.some(o => o.clienteID !== clienteId);
+    if (clientesDistintos) {
+      this.toastrService.error('Todos os orcamentos selecionados devem ser do mesmo cliente', 'Erro');
+      return;
+    }
+
+
+    const produtoIdsSet: number[] = [];
+    selecionados.forEach(o => produtoIdsSet.push(o.produtoID));
+    const produtoIds = Array.from(produtoIdsSet);
+
+
+    const orcamentoIds = selecionados.map(o => o.id);
+
+
+    const lucro = selecionados.reduce((acc, o) => acc + (o.lucroTransacao ?? 0), 0);
+    const valorTotalDaVenda = selecionados.reduce((acc, o) => acc + (o.totalDaVenda ?? 0), 0);
+
+    const venda: Venda = {
+      id: 0, // O ID será gerado pelo backend
+      clienteId,
+      produtoIds,
+      orcamentoIds,
+      lucro,
+      valorTotalDaVenda
+    };
+
+    console.log(venda);
+
+    this.vendaService.salvar(venda).subscribe({
+      next: () => {
+        this.toastrService.success('Venda realizada com sucesso!', 'Sucesso');
+        
+      },
+      error: (err) => {
+        this.toastrService.error('Erro ao realizar a venda', 'Erro');
+        console.error(err);
+      }
+    });
+  }
 
 
 

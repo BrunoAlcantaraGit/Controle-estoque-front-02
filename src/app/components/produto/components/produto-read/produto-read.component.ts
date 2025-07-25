@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
+import { ToastrService } from 'ngx-toastr';
 import { ProdutoService } from '../../produto.service';
 import { ProdutoUpdateComponent } from '../produto-update/produto-update.component';
 
@@ -26,7 +27,8 @@ export class ProdutoReadComponent implements OnInit {
     private produtoService: ProdutoService,
     private router: Router,
     private dialog: MatDialog,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -67,8 +69,10 @@ export class ProdutoReadComponent implements OnInit {
       },
       error: (err: any) => {
         if (err.status === 403) {
-          alert("Produto está vinculado a um orçamento ou venda e não pode ser excluído.");
-          this.router.navigate(['home/orcamento']);
+           this.toastrService.error('Não é possível excluir um produto vinculado a uma orçamento', 'Erro',{
+          timeOut: 100000,
+          progressBar: true
+        });
         } else {
           alert("Erro ao excluir produto.");
         }
