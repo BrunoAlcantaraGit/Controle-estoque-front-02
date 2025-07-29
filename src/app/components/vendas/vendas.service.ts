@@ -47,4 +47,13 @@ export class VendasService {
     return this.http.delete<void>(`${this.url}excluir/${id}`, { headers });
   }
 
+relatorio(): Observable<any> {
+    const token = sessionStorage.getItem('auth-token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(`${this.url}relatorio`, { headers, responseType: 'blob' as 'json' });
+  }
+
 }

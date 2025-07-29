@@ -1,11 +1,11 @@
+<mat-label>Relatório de Vendas</mat-label>
+
 <p-table [value]="vendas" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
     [rowsPerPageOptions]="[5,10]">
     <ng-template pTemplate="header">
         <tr>
             <th style="width:20%">Cliente</th>
-            <th style="width: 20%;">Produtos</th>
-            <th style="width:20%">Lucro</th>
-           
+            <th style="width:20%">Valor total da Venda</th>
             <th style="width:20%">ações</th>
 
         </tr>
@@ -13,15 +13,20 @@
     <ng-template pTemplate="body" let-vendas>
         <tr>
 
-            <td>{{vendas.cliente.nome}}</td>
-            <td>{{vendas.produtos}}</td>
-            <td>{{vendas.lucro }}</td>
+            <td>{{vendas.cliente}}</td>
+            <td>R$ {{vendas.valorTotalDaVenda }}</td>
             <td>
                 <button mat-icon-button style="color: #7001FD"
                     (click)="excluir(vendas.id); $event.stopPropagation()">
                     <i class="material-icons " style="color: red;">delete</i>
                 </button>
 
+                <button mat-icon-button style="color: #7001FD"
+                    (click)="gerarPdf(); $event.stopPropagation()">
+                    <i class="material-icons " style="color: green;">picture_as_pdf</i>
+                 </button>
+
+    
             </td>
         </tr>
 

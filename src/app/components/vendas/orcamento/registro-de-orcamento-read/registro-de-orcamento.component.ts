@@ -135,7 +135,8 @@ export class RegistroDeSaidasReadComponent implements OnInit {
       produtoIds,
       orcamentoIds,
       lucro,
-      valorTotalDaVenda
+      valorTotalDaVenda,
+    
     };
 
     console.log(venda);
@@ -150,10 +151,10 @@ export class RegistroDeSaidasReadComponent implements OnInit {
         console.error(err);
       }
     });
+
+    this.router.navigate(['home/vendas']);
+
   }
-
-
-
 
 
 

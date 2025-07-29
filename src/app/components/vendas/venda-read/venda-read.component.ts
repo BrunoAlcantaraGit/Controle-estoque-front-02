@@ -6,27 +6,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
-
-
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-import { ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-
-
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { MatLabel } from '@angular/material/select';
 
 
 import { Venda } from '../venta.type';
 import { VendasService } from '../vendas.service';
 import { ToastrService } from 'ngx-toastr';
 
+
+
+
+
 @Component({
   selector: 'app-venda-read',
-  imports: [MatTableModule,TableModule, MatCheckboxModule, MatButtonModule, MatIconModule, FormsModule, CommonModule, MatPaginatorModule],
+  imports: [MatTableModule,MatLabel,TableModule, MatCheckboxModule, MatButtonModule, MatIconModule, FormsModule, CommonModule, MatPaginatorModule],
   standalone: true,
   templateUrl: './venda-read.component.html',
   styleUrl: './venda-read.component.scss'
@@ -46,7 +42,10 @@ private vendasService: VendasService,
 ngOnInit(): void {
     this.vendasService.listarVendas().subscribe((dados) => {
       this.vendas = dados;
+      console.log(dados);
     });
+
+    
 }
 
 
@@ -58,4 +57,22 @@ excluir(id: number) {
     this.toastrService.error('Erro ao excluir venda.');
   });
 }
+
+
+gerarPdf(){
+  this.vendasService.relatorio().subscribe((response) => {
+    const blob = new Blob([response], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'relatorio_vendas.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }, (error) => {
+    console.error('Erro ao gerar PDF:', error);
+    this.toastrService.error('Erro ao gerar relatório de vendas.');
+  });
+}
+
 }

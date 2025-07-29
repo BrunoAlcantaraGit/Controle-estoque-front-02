@@ -1,3 +1,5 @@
+import { Cliente } from "../Clientes/cliente-taype";
+
 export interface Venda {
     id: number;
     clienteId: number;
@@ -5,4 +7,5 @@ export interface Venda {
     orcamentoIds: number[];
     lucro: number;
     valorTotalDaVenda: number;
+    
 }
