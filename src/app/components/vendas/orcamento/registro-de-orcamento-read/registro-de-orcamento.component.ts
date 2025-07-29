@@ -130,7 +130,7 @@ export class RegistroDeSaidasReadComponent implements OnInit {
     const valorTotalDaVenda = selecionados.reduce((acc, o) => acc + (o.totalDaVenda ?? 0), 0);
 
     const venda: Venda = {
-      id: 0, // O ID será gerado pelo backend
+      id: 0, 
       clienteId,
       produtoIds,
       orcamentoIds,
@@ -144,15 +144,16 @@ export class RegistroDeSaidasReadComponent implements OnInit {
     this.vendaService.salvar(venda).subscribe({
       next: () => {
         this.toastrService.success('Venda realizada com sucesso!', 'Sucesso');
-        
+        this.router.navigate(['home/venda-read']);
       },
+      
       error: (err) => {
         this.toastrService.error('Erro ao realizar a venda', 'Erro');
         console.error(err);
       }
     });
 
-    this.router.navigate(['home/vendas']);
+    
 
   }
 
