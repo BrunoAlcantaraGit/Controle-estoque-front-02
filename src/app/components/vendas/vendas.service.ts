@@ -56,4 +56,6 @@ relatorio(): Observable<any> {
     return this.http.get<any>(`${this.url}relatorio`, { headers, responseType: 'blob' as 'json' });
   }
 
+
+
 }

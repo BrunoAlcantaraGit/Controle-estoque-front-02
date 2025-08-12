@@ -26,10 +26,10 @@ export class ClienteCreateComponent {
   salvarCliente(cliente: Cliente){
     this.ClienteService.salvar(cliente).subscribe({
       next: () => {
-        this.toastService.success('Fornecedor cadastrado com sucesso!', 'Sucesso');
+        this.toastService.success('Cliente cadastrado com sucesso!', 'Sucesso');
         this.router.navigate(['home/clientes']);
       },
-      error:(error) => this.toastService.error("Usuário ja está cadastrado"),
+      error:(error) => this.toastService.error("CPF ou CNPJ não está no padrão correto, ou cliente já cadastrado","Erro"),
     })
 
 }

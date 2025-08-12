@@ -43,6 +43,7 @@ export class ClienteService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
+
     });
 
     return this.http.get<Cliente>(`${this.url}listar/${id}`, { headers });
