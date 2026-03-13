@@ -62,33 +62,4 @@ models
 
 pages
 
-Aprendizados
 
-Neste projeto pratiquei:
-
-criação de interface com Angular
-
-componentização
-
-consumo de APIs REST
-
-organização de código frontend
-
-integração entre frontend e backend
-
-Melhorias futuras
-
-autenticação
-
-tratamento visual de erros
-
-filtros e pesquisa
-
-paginação
-
-melhoria de responsividade
-
-Autor
-
-Bruno Alcantara
-GitHub: BrunoAlcantaraGit
