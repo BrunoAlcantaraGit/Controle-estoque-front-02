@@ -41,3 +41,54 @@ git clone https://github.com/BrunoAlcantaraGit/Controle-estoque-front-02.git
 cd Controle-estoque-front-02
 npm install
 ng serve
+
+Integração com backend
+
+Este frontend consome a API do projeto:
+
+Backend: Controle-estoque-back
+
+Caso necessário, ajuste a URL da API no arquivo de configuração do Angular.
+
+Estrutura do projeto
+
+Exemplo de organização:
+
+components
+
+services
+
+models
+
+pages
+
+Aprendizados
+
+Neste projeto pratiquei:
+
+criação de interface com Angular
+
+componentização
+
+consumo de APIs REST
+
+organização de código frontend
+
+integração entre frontend e backend
+
+Melhorias futuras
+
+autenticação
+
+tratamento visual de erros
+
+filtros e pesquisa
+
+paginação
+
+melhoria de responsividade
+
+Autor
+
+Bruno Alcantara
+GitHub: BrunoAlcantaraGit
